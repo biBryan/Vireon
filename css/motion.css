@@ -11,9 +11,6 @@
     50%      { transform: scale(1.08) translate(1%, 1.5%); opacity: 0.20; }
 }
 
-.blob-1 { animation: breathe 22s ease-in-out infinite; }
-.blob-2 { animation: breathe 28s ease-in-out infinite reverse; }
-
 /* ─────────────────────────────────────────────
    Interface Entrance & Float
 ───────────────────────────────────────────── */
@@ -56,23 +53,7 @@
     background: radial-gradient(circle at 50% 42%, #161616 0%, var(--obsidian) 100%);
 }
 
-/* Blobs awaken with the system */
-.system-active .blob {
-    opacity: 0.28;
-    filter: blur(65px);
-    transition: all 1.2s ease;
-}
-
 /* Blobs slow and dim while thinking — focus narrows */
-.system-analyzing .blob-1,
-.system-analyzing .blob-2,
-.system-crystallizing .blob-1,
-.system-crystallizing .blob-2 {
-    animation-duration: 80s;
-    opacity: 0.12;
-    filter: blur(110px);
-    transition: all 2.5s ease;
-}
 
 /* ─────────────────────────────────────────────
    Input Focus Glow

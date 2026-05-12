@@ -27,21 +27,9 @@
     pointer-events: none;
 }
 
-.bg-noise {
-    z-index: 1;
-    opacity: 0.03;
-    /* Noise image removed to prevent broken overlay regressions */
-    filter: contrast(150%) brightness(1000%);
-}
-
 .bg-ambient {
     z-index: 0;
     background: radial-gradient(circle at 50% 50%, var(--graphite) 0%, var(--obsidian) 100%);
-}
-
-.bg-vignette {
-    z-index: 2;
-    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%);
 }
 
 /* Main UI Wrapper */
