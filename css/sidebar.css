@@ -89,7 +89,14 @@
     cursor: pointer;
     position: relative;
     flex-shrink: 0;
-    transition: background 0.25s ease;
+    transition: background 0.25s ease, box-shadow 0.25s ease;
+    border-bottom: 1px solid transparent;
+}
+
+/* En modo colapsado, el toggle tiene una sutil presencia extra */
+.vireon-sidebar:not(.expanded) .sidebar-toggle {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .sidebar-toggle:hover {
@@ -186,19 +193,43 @@
     background: linear-gradient(120deg, #ffffff 0%, #8a94a5 50%, #606a78 100%);
     -webkit-background-clip: text;
     background-clip: text;
-    padding: 0.5rem 1rem 1rem;
+    padding: 0.5rem 0 1rem;
     white-space: nowrap;
-    opacity: 0;
-    transform: translateX(-6px);
-    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    height: 60px;
+    display: flex;
+    align-items: center;
     pointer-events: none;
     user-select: none;
 }
 
-.vireon-sidebar.expanded .sidebar-branding {
+.vireon-sidebar-wordmark {
+    opacity: 0;
+    transform: translateX(10px);
+    transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    margin-left: 1rem;
+}
+
+.vireon-sidebar.expanded .vireon-sidebar-wordmark {
     opacity: 1;
     transform: translateX(0);
     transition-delay: 0.05s;
+}
+
+/* Mini logo visible only when collapsed */
+.vireon-mini-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22px;
+    height: auto;
+    opacity: 0.4;
+    transition: opacity 0.3s ease, transform 0.4s ease;
+}
+
+.vireon-sidebar.expanded .vireon-mini-logo {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.8);
 }
 
 /* ─────────────────────────────────────────────
@@ -237,9 +268,10 @@
         rgba(255, 255, 255, 0.08) 70%,
         transparent 95%
     );
-    margin: 0.75rem 0.5rem;
+    margin: 0.8rem 0.5rem;
     flex-shrink: 0;
     position: relative;
+    transition: margin 0.3s ease, background 0.3s ease;
 }
 
 .sidebar-divider::after {
@@ -249,6 +281,20 @@
     width: 15px; height: 3px;
     background: rgba(255, 255, 255, 0.2);
     border-radius: 2px;
+    transition: opacity 0.3s ease;
+}
+
+/* Collapsed state: dividers become subtle dots */
+.vireon-sidebar:not(.expanded) .sidebar-divider {
+    margin: 0.8rem auto;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+}
+
+.vireon-sidebar:not(.expanded) .sidebar-divider::after {
+    opacity: 0;
 }
 
 
@@ -262,9 +308,10 @@
     align-items: center;
     gap: 0;
     width: 100%;
-    height: 40px;
-    min-height: 40px;
+    height: 42px;
+    min-height: 42px;
     padding: 0;
+    margin: 0.15rem 0;
     background: transparent;
     border: none;
     cursor: pointer;
@@ -276,7 +323,8 @@
     white-space: nowrap;
     position: relative;
     transition: background 0.25s ease,
-                color 0.25s ease;
+                color 0.25s ease,
+                margin 0.3s ease;
 }
 
 /* Hover — subtle background + left accent reveal */

@@ -75,6 +75,9 @@ const Sidebar = (() => {
         const headerBranding = document.createElement('div');
         headerBranding.className = 'sidebar-branding';
         headerBranding.innerHTML = `
+            <svg class="vireon-mini-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 25,25 L 50,75 L 75,25" fill="none" stroke="url(#vireon-silver)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
             <svg class="vireon-sidebar-wordmark" viewBox="0 0 540 100" xmlns="http://www.w3.org/2000/svg" style="width: 90px; height: auto; filter: drop-shadow(0 0 6px rgba(255,255,255,0.08));">
                 <g fill="none" stroke="url(#vireon-silver)" stroke-width="10" stroke-linecap="butt" stroke-linejoin="miter">
                     <path d="M 30,20 L 56,75" />
