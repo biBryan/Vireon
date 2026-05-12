@@ -3,6 +3,7 @@
 
 # Dependencias (se reinstalan con npm install)
 node_modules/
+backend/node_modules/
 
 # Vercel local
 .vercel/
