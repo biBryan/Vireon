@@ -16,21 +16,22 @@
     /* Glass layers */
     --sidebar-bg: linear-gradient(
         180deg,
-        rgba(14, 14, 16, 0.88) 0%,
-        rgba(9, 9, 11, 0.94) 100%
+        rgba(10, 12, 16, 0.88) 0%,
+        rgba(5, 6, 8, 0.96) 100%
     );
-    --sidebar-blur: 30px;
+    --sidebar-blur: 40px;
 
-    /* Borders & edges — softer, more integrated */
-    --sidebar-border: rgba(255, 255, 255, 0.03);
-    --sidebar-edge-glow: 1px 0 0 rgba(255, 255, 255, 0.02),
-                          4px 0 20px rgba(0, 0, 0, 0.3);
-    --sidebar-edge-glow-expanded: 1px 0 0 rgba(255, 255, 255, 0.03),
-                                   8px 0 50px rgba(0, 0, 0, 0.45);
+    /* Borders & edges — futuristic glow */
+    --sidebar-border: rgba(255, 255, 255, 0.04);
+    --sidebar-edge-glow: 1px 0 0 rgba(255, 255, 255, 0.05),
+                          5px 0 25px rgba(0, 0, 0, 0.5);
+    --sidebar-edge-glow-expanded: 1px 0 0 rgba(255, 255, 255, 0.08),
+                                   inset -1px 0 20px rgba(0, 150, 255, 0.02),
+                                   10px 0 50px rgba(0, 0, 0, 0.5);
 
     /* Interaction */
-    --sidebar-hover: rgba(255, 255, 255, 0.04);
-    --sidebar-active: rgba(255, 255, 255, 0.07);
+    --sidebar-hover: linear-gradient(90deg, rgba(255, 255, 255, 0.06) 0%, transparent 100%);
+    --sidebar-active: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
 
     /* Text hierarchy — improved contrast */
     --sidebar-text: rgba(220, 220, 225, 0.75);
@@ -39,7 +40,7 @@
     --sidebar-icon-color: rgba(210, 210, 220, 0.65);
 
     /* Motion — slightly slower for elegance */
-    --sidebar-transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --sidebar-transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 
@@ -225,19 +226,29 @@
 
 
 /* ─────────────────────────────────────────────
-   Section Dividers — gradient, not hard lines
+   Section Dividers — tech lines
 ───────────────────────────────────────────── */
 .sidebar-divider {
     height: 1px;
     background: linear-gradient(
         90deg,
         transparent 5%,
-        rgba(255, 255, 255, 0.045) 40%,
-        rgba(255, 255, 255, 0.045) 60%,
+        rgba(255, 255, 255, 0.08) 30%,
+        rgba(255, 255, 255, 0.08) 70%,
         transparent 95%
     );
-    margin: 0.65rem 0.5rem;
+    margin: 0.75rem 0.5rem;
     flex-shrink: 0;
+    position: relative;
+}
+
+.sidebar-divider::after {
+    content: '';
+    position: absolute;
+    top: -1px; left: 50%; transform: translateX(-50%);
+    width: 15px; height: 3px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
 }
 
 
@@ -285,15 +296,18 @@
     left: 0;
     top: 50%;
     transform: translateY(-50%);
-    width: 2px;
+    width: 3px;
     height: 0;
     background: rgba(255, 255, 255, 0.2);
-    border-radius: 0 1px 1px 0;
-    transition: height 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border-radius: 0 2px 2px 0;
+    transition: height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .sidebar-item:hover::before {
-    height: 18px;
+    height: 22px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
 
@@ -307,15 +321,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.95rem;
+    font-size: 1rem;
     flex-shrink: 0;
     opacity: 0.5;
-    transition: opacity 0.25s ease, transform 0.2s ease;
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.3s ease;
 }
 
 .sidebar-item:hover .sidebar-item-icon {
-    opacity: 0.88;
-    transform: scale(1.05);
+    opacity: 1;
+    transform: scale(1.15);
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
 }
 
 
@@ -348,14 +363,16 @@
     font-size: 0.46rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.12);
-    background: none;
-    border: none;
-    padding: 0;
+    color: #00e5ff;
+    background: rgba(0, 229, 255, 0.1);
+    border: 1px solid rgba(0, 229, 255, 0.3);
+    border-radius: 4px;
+    padding: 0.1rem 0.3rem;
     opacity: 0;
-    transition: opacity 0.25s ease;
+    transition: opacity 0.25s ease, box-shadow 0.25s ease;
     pointer-events: none;
-    font-weight: 300;
+    font-weight: 500;
+    box-shadow: 0 0 5px rgba(0, 229, 255, 0.2);
 }
 
 .vireon-sidebar.expanded .sidebar-badge-placeholder {
@@ -369,11 +386,19 @@
 ───────────────────────────────────────────── */
 .sidebar-item.active {
     color: var(--sidebar-text-bright);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
 }
 
 .sidebar-item.active::before {
-    height: 18px;
-    background: rgba(255, 255, 255, 0.3);
+    height: 22px;
+    background: #00e5ff;
+    box-shadow: 0 0 12px #00e5ff;
+}
+
+.sidebar-item.active .sidebar-item-icon {
+    opacity: 1;
+    color: #00e5ff;
+    text-shadow: 0 0 15px rgba(0, 229, 255, 0.6);
 }
 
 /* ═════════════════════════════════════════════
@@ -383,17 +408,33 @@
 /* Status Widget */
 .sidebar-status-widget {
     margin: 0.5rem 1rem 1rem;
-    padding: 0.75rem 0.85rem;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
+    padding: 0.85rem 0.95rem;
+    background: linear-gradient(145deg, rgba(20, 20, 25, 0.4), rgba(10, 10, 15, 0.8));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 0.7rem;
     opacity: 0;
     transform: translateY(-5px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     pointer-events: none;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3), 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.sidebar-status-widget::before {
+    content: '';
+    position: absolute;
+    top: -100%; left: 0; right: 0; height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.02), transparent);
+    animation: scan 4s linear infinite;
+    pointer-events: none;
+}
+@keyframes scan {
+    0% { top: -100%; }
+    100% { top: 100%; }
 }
 
 .vireon-sidebar.expanded .sidebar-status-widget {
@@ -407,20 +448,25 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+    z-index: 1;
 }
 
 .status-label {
-    font-size: 0.5rem;
-    letter-spacing: 0.15em;
-    color: rgba(255, 255, 255, 0.35);
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.4);
+    font-family: 'Orbitron', var(--font-primary);
 }
 
 .status-value {
-    font-size: 0.6rem;
-    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.85);
     display: flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.5rem;
+    font-family: monospace;
+    letter-spacing: 0.05em;
 }
 
 .status-dot {
@@ -435,34 +481,35 @@
 }
 
 .status-dot.busy {
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
-    animation: pulse 1.5s infinite;
+    background: #00e5ff;
+    box-shadow: 0 0 10px #00e5ff, 0 0 20px rgba(0, 229, 255, 0.4);
+    animation: pulse-busy 1.5s infinite;
 }
 
 .status-dot.demo {
-    background: rgba(200, 170, 100, 0.7);
-    box-shadow: 0 0 6px rgba(200, 170, 100, 0.3);
+    background: #ffb300;
+    box-shadow: 0 0 10px #ffb300;
 }
 
-@keyframes pulse {
-    0% { opacity: 0.6; }
-    50% { opacity: 1; }
-    100% { opacity: 0.6; }
+@keyframes pulse-busy {
+    0% { opacity: 0.6; transform: scale(0.95); }
+    50% { opacity: 1; transform: scale(1.1); }
+    100% { opacity: 0.6; transform: scale(0.95); }
 }
 
 /* Mode Switcher */
 .sidebar-mode-switcher {
     display: flex;
     margin: 0.5rem 1rem 1rem;
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.04);
-    border-radius: 6px;
-    padding: 0.2rem;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 0.25rem;
     opacity: 0;
     transform: translateY(-5px);
     transition: opacity 0.3s ease, transform 0.3s ease;
     pointer-events: none;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 
 .vireon-sidebar.expanded .sidebar-mode-switcher {
@@ -476,22 +523,25 @@
     flex: 1;
     background: transparent;
     border: none;
-    padding: 0.4rem 0;
+    padding: 0.45rem 0;
     font-size: 0.6rem;
-    color: rgba(255, 255, 255, 0.4);
-    border-radius: 4px;
+    color: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
     cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    letter-spacing: 0.05em;
 }
 
 .mode-btn:hover {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.03);
 }
 
 .mode-btn.active {
-    background: rgba(255, 255, 255, 0.08);
-    color: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%);
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
 }
 
 /* ═════════════════════════════════════════════
