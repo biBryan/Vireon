@@ -1,0 +1,10 @@
+{
+  "name": "vireon-ai",
+  "version": "1.0.0",
+  "description": "VIREON AI Interface",
+  "main": "index.js",
+  "scripts": {},
+  "dependencies": {
+    "@google/genai": "latest"
+  }
+}

@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;400;600&family=Orbitron:wght@400;500;600;700&display=swap');
+
+
+
+:root {
+    /* Color Palette - Premium Monochrome */
+    --obsidian: #080808;
+    --graphite: #121212;
+    --graphite-light: #1A1A1A;
+    --silver: #E8E8E8;
+    --smoke: #4A4A4A;
+    --smoke-dark: #222222;
+    --glass: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    
+    /* Typography */
+    --font-primary: 'Outfit', sans-serif;
+    
+    /* Motion Durations */
+    --duration-slow: 8s;
+    --duration-med: 0.6s;
+    --duration-fast: 0.2s;
+    
+    /* Shadows & Effects */
+    --glow-soft: 0 0 30px rgba(255, 255, 255, 0.05);
+    --glow-active: 0 0 50px rgba(255, 255, 255, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    background-color: var(--obsidian);
+    color: var(--silver);
+    font-family: var(--font-primary);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    /* Scrollbar global oculto — los scroll internos definen los suyos */
+    scrollbar-width: none;
+}
+
+::selection {
+    background: var(--silver);
+    color: var(--obsidian);
+}
+
+/* Scrollbar global desactivado — los elementos específicos definen los suyos */
+* {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+*::-webkit-scrollbar {
+    display: none;
+}

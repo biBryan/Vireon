@@ -1,0 +1,754 @@
+/* ═══════════════════════════════════════════════════════════
+   SIDEBAR.CSS — Phase 7C: Visual Polish
+   Collapsed: 52px  ·  Expanded: 272px
+   Toggle: click only  ·  Aesthetic: crystalline instrument panel
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────
+   Design Tokens — Sidebar
+   Scoped variables for the panel. Reference
+   base.css tokens (--obsidian, --font-primary, etc.)
+───────────────────────────────────────────── */
+:root {
+    --sidebar-collapsed: 52px;
+    --sidebar-expanded: 272px;
+
+    /* Glass layers */
+    --sidebar-bg: linear-gradient(
+        180deg,
+        rgba(14, 14, 16, 0.88) 0%,
+        rgba(9, 9, 11, 0.94) 100%
+    );
+    --sidebar-blur: 30px;
+
+    /* Borders & edges — softer, more integrated */
+    --sidebar-border: rgba(255, 255, 255, 0.03);
+    --sidebar-edge-glow: 1px 0 0 rgba(255, 255, 255, 0.02),
+                          4px 0 20px rgba(0, 0, 0, 0.3);
+    --sidebar-edge-glow-expanded: 1px 0 0 rgba(255, 255, 255, 0.03),
+                                   8px 0 50px rgba(0, 0, 0, 0.45);
+
+    /* Interaction */
+    --sidebar-hover: rgba(255, 255, 255, 0.04);
+    --sidebar-active: rgba(255, 255, 255, 0.07);
+
+    /* Text hierarchy — improved contrast */
+    --sidebar-text: rgba(220, 220, 225, 0.75);
+    --sidebar-text-bright: rgba(255, 255, 255, 0.95);
+    --sidebar-text-dim: rgba(255, 255, 255, 0.25);
+    --sidebar-icon-color: rgba(210, 210, 220, 0.65);
+
+    /* Motion — slightly slower for elegance */
+    --sidebar-transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+
+/* ═════════════════════════════════════════════
+   PANEL STRUCTURE
+   ═════════════════════════════════════════════ */
+
+.vireon-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-collapsed);
+    height: 100vh;
+    background: var(--sidebar-bg);
+    backdrop-filter: blur(var(--sidebar-blur));
+    -webkit-backdrop-filter: blur(var(--sidebar-blur));
+    border-right: none;
+    box-shadow: var(--sidebar-edge-glow);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: width var(--sidebar-transition),
+                box-shadow var(--sidebar-transition);
+    user-select: none;
+}
+
+.vireon-sidebar.expanded {
+    width: var(--sidebar-expanded);
+    box-shadow: var(--sidebar-edge-glow-expanded);
+}
+
+
+/* ─────────────────────────────────────────────
+   Toggle Button — the only entry point
+───────────────────────────────────────────── */
+.sidebar-toggle {
+    width: var(--sidebar-collapsed);
+    height: var(--sidebar-collapsed);
+    min-height: var(--sidebar-collapsed);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    transition: background 0.25s ease;
+}
+
+.sidebar-toggle:hover {
+    background: var(--sidebar-hover);
+}
+
+.sidebar-toggle:active {
+    background: var(--sidebar-active);
+}
+
+/* Hamburger lines — delicate, intentional */
+.toggle-icon {
+    display: flex;
+    flex-direction: column;
+    gap: 4.5px;
+    width: 18px;
+}
+
+.toggle-icon span {
+    display: block;
+    height: 1.5px;
+    background: var(--sidebar-icon-color);
+    border-radius: 1px;
+    transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1),
+                opacity 0.3s ease,
+                width 0.3s ease,
+                background 0.3s ease;
+}
+
+.toggle-icon span:nth-child(1) { width: 18px; }
+.toggle-icon span:nth-child(2) { width: 13px; }
+.toggle-icon span:nth-child(3) { width: 18px; }
+
+.sidebar-toggle:hover .toggle-icon span {
+    background: rgba(200, 200, 210, 0.65);
+}
+
+/* → X morphing when expanded */
+.vireon-sidebar.expanded .toggle-icon span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+    width: 18px;
+}
+.vireon-sidebar.expanded .toggle-icon span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-6px);
+}
+.vireon-sidebar.expanded .toggle-icon span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+    width: 18px;
+}
+
+
+/* ═════════════════════════════════════════════
+   CONTENT AREA
+   ═════════════════════════════════════════════ */
+
+.sidebar-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0.25rem 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+}
+
+.sidebar-content::-webkit-scrollbar { display: none; }
+
+/* Subtle top separator after toggle */
+.sidebar-content::before {
+    content: '';
+    display: block;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent 10%,
+        rgba(255, 255, 255, 0.05) 50%,
+        transparent 90%
+    );
+    margin: 0 0.5rem 0.35rem;
+    flex-shrink: 0;
+}
+
+
+/* ─────────────────────────────────────────────
+   Sidebar Branding Header
+───────────────────────────────────────────── */
+.sidebar-branding {
+    font-family: 'Orbitron', var(--font-primary);
+    font-size: 0.75rem;
+    font-weight: normal;
+    letter-spacing: 0.45em;
+    color: transparent;
+    background: linear-gradient(120deg, #ffffff 0%, #8a94a5 50%, #606a78 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    padding: 0.5rem 1rem 1rem;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    pointer-events: none;
+    user-select: none;
+}
+
+.vireon-sidebar.expanded .sidebar-branding {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.05s;
+}
+
+/* ─────────────────────────────────────────────
+   Section Labels
+   Whisper-quiet headings. Visible only expanded.
+───────────────────────────────────────────── */
+.sidebar-section-label {
+    font-size: 0.5rem;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.16);
+    padding: 0.85rem 1rem 0.35rem;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+    flex-shrink: 0;
+}
+
+.vireon-sidebar.expanded .sidebar-section-label {
+    opacity: 1;
+    transition-delay: 0.12s;
+}
+
+
+/* ─────────────────────────────────────────────
+   Section Dividers — gradient, not hard lines
+───────────────────────────────────────────── */
+.sidebar-divider {
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent 5%,
+        rgba(255, 255, 255, 0.045) 40%,
+        rgba(255, 255, 255, 0.045) 60%,
+        transparent 95%
+    );
+    margin: 0.65rem 0.5rem;
+    flex-shrink: 0;
+}
+
+
+/* ═════════════════════════════════════════════
+   SIDEBAR ITEMS (action buttons)
+   Generous touch targets, subtle interactions.
+   ═════════════════════════════════════════════ */
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+    height: 40px;
+    min-height: 40px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--sidebar-text);
+    font-family: var(--font-primary);
+    font-size: 0.73rem;
+    font-weight: 300;
+    letter-spacing: 0.025em;
+    white-space: nowrap;
+    position: relative;
+    transition: background 0.25s ease,
+                color 0.25s ease;
+}
+
+/* Hover — subtle background + left accent reveal */
+.sidebar-item:hover {
+    background: var(--sidebar-hover);
+    color: var(--sidebar-text-bright);
+}
+
+.sidebar-item:active {
+    background: var(--sidebar-active);
+}
+
+/* Left accent on hover — appears via ::before */
+.sidebar-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 0 1px 1px 0;
+    transition: height 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.sidebar-item:hover::before {
+    height: 18px;
+}
+
+
+/* ─────────────────────────────────────────────
+   Icon Area — anchored to collapsed width
+───────────────────────────────────────────── */
+.sidebar-item-icon {
+    width: var(--sidebar-collapsed);
+    min-width: var(--sidebar-collapsed);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+    opacity: 0.5;
+    transition: opacity 0.25s ease, transform 0.2s ease;
+}
+
+.sidebar-item:hover .sidebar-item-icon {
+    opacity: 0.88;
+    transform: scale(1.05);
+}
+
+
+/* ─────────────────────────────────────────────
+   Labels — slide in gently when expanded
+───────────────────────────────────────────── */
+.sidebar-item-label {
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity 0.3s ease,
+                transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    pointer-events: none;
+}
+
+.vireon-sidebar.expanded .sidebar-item-label {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.1s;
+}
+
+
+/* ═════════════════════════════════════════════
+   PLACEHOLDER BADGES
+   Ethereal "coming soon" indicators.
+   ═════════════════════════════════════════════ */
+
+.sidebar-badge-placeholder {
+    margin-left: auto;
+    margin-right: 0.9rem;
+    font-size: 0.46rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.12);
+    background: none;
+    border: none;
+    padding: 0;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+    font-weight: 300;
+}
+
+.vireon-sidebar.expanded .sidebar-badge-placeholder {
+    opacity: 1;
+    transition-delay: 0.18s;
+}
+
+
+/* ─────────────────────────────────────────────
+   Active / selected item state
+───────────────────────────────────────────── */
+.sidebar-item.active {
+    color: var(--sidebar-text-bright);
+}
+
+.sidebar-item.active::before {
+    height: 18px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* ═════════════════════════════════════════════
+   WIDGETS (Phase 8)
+   ═════════════════════════════════════════════ */
+
+/* Status Widget */
+.sidebar-status-widget {
+    margin: 0.5rem 1rem 1rem;
+    padding: 0.75rem 0.85rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.vireon-sidebar.expanded .sidebar-status-widget {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.1s;
+    pointer-events: auto;
+}
+
+.status-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.status-label {
+    font-size: 0.5rem;
+    letter-spacing: 0.15em;
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.status-value {
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.75);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.status-dot.idle {
+    background: rgba(150, 150, 160, 0.5);
+    box-shadow: 0 0 5px rgba(150, 150, 160, 0.3);
+}
+
+.status-dot.busy {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+    animation: pulse 1.5s infinite;
+}
+
+.status-dot.demo {
+    background: rgba(200, 170, 100, 0.7);
+    box-shadow: 0 0 6px rgba(200, 170, 100, 0.3);
+}
+
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+/* Mode Switcher */
+.sidebar-mode-switcher {
+    display: flex;
+    margin: 0.5rem 1rem 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 6px;
+    padding: 0.2rem;
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.vireon-sidebar.expanded .sidebar-mode-switcher {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.15s;
+    pointer-events: auto;
+}
+
+.mode-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 0.4rem 0;
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.4);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.mode-btn:hover {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.mode-btn.active {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* ═════════════════════════════════════════════
+   CORE DISPLAY PANEL (Phase 7D)
+   Internal area for /help, /status, /model
+   ═════════════════════════════════════════════ */
+
+.sidebar-core-display {
+    max-height: 0;
+    overflow: hidden;
+    margin: 0 0.8rem;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.0);
+    border-radius: 6px;
+    transition: max-height 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+                border-color 0.4s ease,
+                margin-bottom 0.4s ease;
+    opacity: 0;
+}
+
+.sidebar-core-display.active {
+    max-height: 600px;
+    margin-bottom: 1rem;
+    border-color: rgba(255, 255, 255, 0.06);
+    opacity: 1;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.sidebar-core-display::-webkit-scrollbar {
+    display: none;
+}
+
+.core-display-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.core-display-title {
+    font-size: 0.5rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.core-display-close {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    padding: 0.4rem;
+    margin: -0.4rem;
+}
+
+.core-display-close:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.core-display-content {
+    padding: 0.8rem;
+}
+
+/* Override Markdown styles for Sidebar Context */
+.core-display-content .md-h1,
+.core-display-content .md-h2 {
+    font-size: 0.75rem;
+    margin: 0.6rem 0 0.4rem;
+    border-bottom: none;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.core-display-content .md-h3 {
+    font-size: 0.65rem;
+    margin: 0.6rem 0 0.3rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.core-display-content .md-p {
+    font-size: 0.68rem;
+    line-height: 1.5;
+    color: rgba(220, 220, 220, 0.7);
+    margin-bottom: 0.4rem;
+}
+
+.core-display-content .md-ul,
+.core-display-content .md-ol {
+    padding-left: 0.8rem;
+    margin: 0.4rem 0;
+}
+
+.core-display-content .md-ul li,
+.core-display-content .md-ol li {
+    font-size: 0.65rem;
+    line-height: 1.5;
+    margin-bottom: 0.15rem;
+    color: rgba(200, 200, 200, 0.65);
+}
+
+.core-display-content strong {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+
+/* ═════════════════════════════════════════════
+   FOOTER
+   ═════════════════════════════════════════════ */
+
+.sidebar-footer {
+    flex-shrink: 0;
+    padding: 0.5rem 0;
+    border-top: none;
+    position: relative;
+}
+
+/* Gradient top-line instead of hard border */
+.sidebar-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.05),
+        transparent
+    );
+}
+
+
+/* ═════════════════════════════════════════════
+   MAIN CONTENT RELATIONSHIP
+   Content shifts right. The sidebar never
+   obscures the chat — it's a sibling, not
+   an overlay.
+   ═════════════════════════════════════════════ */
+
+.system-container {
+    padding-left: var(--sidebar-collapsed);
+    box-sizing: border-box;
+    transition: padding-left var(--sidebar-transition);
+}
+
+body.sidebar-expanded .system-container {
+    padding-left: var(--sidebar-expanded);
+}
+
+/* Background layers stay fullscreen — sidebar sits above them */
+
+
+/* ═════════════════════════════════════════════
+   TOOLTIPS — collapsed state only
+   ═════════════════════════════════════════════ */
+
+.sidebar-item[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: calc(var(--sidebar-collapsed) + 8px);
+    top: 50%;
+    transform: translateY(-50%) translateX(-2px);
+    background: rgba(12, 12, 14, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    color: var(--sidebar-text-bright);
+    font-family: var(--font-primary);
+    font-size: 0.6rem;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    padding: 0.3rem 0.65rem;
+    border-radius: 5px;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 200;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Show tooltip only when collapsed */
+.vireon-sidebar:not(.expanded) .sidebar-item:hover[data-tooltip]::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+
+
+/* ═════════════════════════════════════════════
+   RECIENTES — placeholder ghost list
+   Intentionally dim and italic to signal
+   "future content" without looking broken.
+   ═════════════════════════════════════════════ */
+
+.sidebar-recent-placeholder {
+    padding: 0.2rem 0;
+}
+
+.sidebar-recent-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 32px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: default;
+    color: rgba(255, 255, 255, 0.12);
+    font-family: var(--font-primary);
+    font-size: 0.62rem;
+    font-weight: 300;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.sidebar-recent-item .sidebar-item-icon {
+    font-size: 0.55rem;
+    opacity: 0.2;
+}
+
+.sidebar-recent-item .sidebar-item-label {
+    opacity: 0;
+    color: rgba(255, 255, 255, 0.16);
+    font-style: italic;
+    letter-spacing: 0.02em;
+}
+
+.vireon-sidebar.expanded .sidebar-recent-item .sidebar-item-label {
+    opacity: 1;
+    transition-delay: 0.14s;
+}
+
+
+/* ═════════════════════════════════════════════
+   RESPONSIVE
+   ═════════════════════════════════════════════ */
+
+@media (max-width: 600px) {
+    .vireon-sidebar {
+        width: 0;
+        box-shadow: none;
+    }
+    .vireon-sidebar:not(.expanded) .sidebar-content {
+        opacity: 0;
+        pointer-events: none;
+        visibility: hidden;
+    }
+    .vireon-sidebar.expanded {
+        width: var(--sidebar-expanded);
+        box-shadow: var(--sidebar-edge-glow-expanded);
+    }
+    .system-container {
+        padding-left: 0 !important;
+    }
+    body.sidebar-expanded .system-container {
+        padding-left: 0 !important;
+    }
+}

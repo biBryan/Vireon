@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vireon</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/motion.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+</head>
+<body id="system-body">
+
+    <!-- Background Architecture -->
+    <div class="bg-layer bg-ambient"></div>
+    <div class="bg-layer bg-vignette"></div>
+    <div class="bg-layer bg-noise"></div>
+
+    <!-- System Interface -->
+    <main class="system-container">
+        <section class="interface-surface" id="ui-surface">
+
+            <div class="vireon-logo-container">
+                <svg class="vireon-wordmark" viewBox="0 0 540 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="vireon-silver" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="540" y2="100">
+                            <stop offset="0%" stop-color="#ffffff"/>
+                            <stop offset="35%" stop-color="#9aa4b5"/>
+                            <stop offset="65%" stop-color="#ffffff"/>
+                            <stop offset="100%" stop-color="#606a78"/>
+                        </linearGradient>
+                    </defs>
+                    <g fill="none" stroke="url(#vireon-silver)" stroke-width="10" stroke-linecap="butt" stroke-linejoin="miter">
+                        <!-- V: Diagonales firmes con una sutil separación en el vértice -->
+                        <path d="M 30,20 L 56,75" />
+                        <path d="M 90,20 L 64,75" />
+                        
+                        <!-- I: Pilar recto con un único corte transversal central -->
+                        <path d="M 130,20 L 130.01,45" />
+                        <path d="M 130,55 L 130.01,80" />
+                        
+                        <!-- R: Tallo izquierdo sólido, cuenco y pierna separados geométricamente -->
+                        <path d="M 170,20 L 170.01,80" />
+                        <path d="M 185,20 L 205,20 A 15,15 0 0,1 220,35 A 15,15 0 0,1 205,50 L 185,50" />
+                        <path d="M 200,60 L 220,80" />
+                        
+                        <!-- E: Brazos anclados a espinas divididas, brazo central flotante -->
+                        <path d="M 260,20 L 260.01,40" />
+                        <path d="M 260,60 L 260.01,80" />
+                        <path d="M 260,20 L 310,20.01" />
+                        <path d="M 275,50 L 300,50.01" />
+                        <path d="M 260,80 L 310,80.01" />
+                        
+                        <!-- O: Anillo geométrico con una única incisión lateral -->
+                        <circle cx="380" cy="50" r="30" stroke-dasharray="173.5 15" stroke-dashoffset="-15" />
+                        
+                        <!-- N: Diagonal continua, con tallos verticales incompletos en esquinas opuestas -->
+                        <path d="M 450,35 L 450.01,80" />
+                        <path d="M 450,20 L 510,80" />
+                        <path d="M 510,20 L 510.01,65" />
+                    </g>
+                </svg>
+            </div>
+
+            <!-- Status bar -->
+            <div class="status-container" id="status-container">
+                <span class="status-dot" id="status-dot"></span>
+                <span id="system-status">Sistema en reposo</span>
+            </div>
+
+            <!-- Historial Visible -->
+            <div class="history-container" id="history-container"></div>
+
+            <!-- Processing Scan Bar -->
+            <div class="processing-stage" id="processing-stage" aria-hidden="true">
+                <div class="processing-bar">
+                    <div class="processing-fill" id="processing-fill"></div>
+                </div>
+            </div>
+
+            <!-- Thought Anatomy -->
+            <div class="thought-anatomy" id="thought-anatomy" aria-live="polite">
+                <div class="anatomy-rows" id="anatomy-rows"></div>
+
+                <!-- Synthesis point — the fold between analysis and output -->
+                <div class="synthesis-separator" id="synthesis-sep"></div>
+
+                <!-- Prompt Output Block -->
+                <div class="prompt-output" id="prompt-output" title="Click para copiar">
+                    <div class="prompt-header">
+                        <span class="prompt-label">RESPUESTA</span>
+                        <span class="copy-hint" id="copy-hint">COPIAR</span>
+                    </div>
+                    <div class="prompt-text" id="prompt-text"></div>
+                    <div class="prompt-timestamp" id="prompt-timestamp"></div>
+                </div>
+            </div>
+
+            <!-- Input Portal (Ahora abajo de todo) -->
+            <div class="input-portal" id="input-container">
+                <div class="portal-corner tl"></div>
+                <div class="portal-corner tr"></div>
+                <div class="portal-corner bl"></div>
+                <div class="portal-corner br"></div>
+
+                <input type="text"
+                       class="main-input"
+                       id="system-input"
+                       placeholder="Inicia la secuencia..."
+                       autocomplete="off">
+            </div>
+        </section>
+    </main>
+
+    <!-- Logic Layer — load order: system → api → cache → engine → markdown → output → commands → interactions -->
+    <script src="js/system.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/cache.js"></script>
+    <script src="js/engine.js"></script>
+    <script src="js/markdown.js"></script>
+    <script src="js/output.js"></script>
+    <script src="js/commands.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/interactions.js"></script>
+
+</body>
+</html>

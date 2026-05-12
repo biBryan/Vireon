@@ -1,0 +1,634 @@
+/* ═══════════════════════════════════════════════════════════
+   COMPONENTS.CSS — Phase 3: Thought Anatomy
+   Visual language: schematic registers, not chat.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────
+   Vireon Animated Logo
+───────────────────────────────────────────── */
+.vireon-logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    position: relative;
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: fade-in-down 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    animation-delay: 0.2s;
+}
+
+.vireon-wordmark {
+    width: 320px;
+    height: auto;
+    max-width: 100%;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.10));
+    animation: float 8s ease-in-out infinite;
+    user-select: none;
+    margin: 0;
+}
+
+/* @keyframes shine and pulse-width removed — no active usage (wordmark residues) */
+
+
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+@keyframes fade-in-down {
+    0% {
+        opacity: 0;
+        transform: translateY(-15px) scale(0.98);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ─────────────────────────────────────────────
+   Input Portal
+───────────────────────────────────────────── */
+.input-portal {
+    position: relative;
+    width: 100%;
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 18px;
+    padding: 1.4rem 2rem;
+    margin-top: auto;
+    /* Anchors it to the bottom if there is free space */
+    transition:
+        padding 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
+        border-color 0.5s ease,
+        box-shadow 0.5s ease,
+        transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow: var(--glow-soft);
+}
+
+/* Compressed state — when anatomy is visible */
+.input-portal.compressed {
+    padding: 0.85rem 2rem;
+    border-color: rgba(255, 255, 255, 0.05);
+    box-shadow: none;
+}
+
+.main-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--silver);
+    font-family: var(--font-primary);
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    text-align: center;
+    transition: font-size 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
+        opacity 0.4s ease,
+        color 0.5s ease;
+}
+
+/* Input shrinks when system is busy */
+.input-portal.compressed .main-input {
+    font-size: 0.95rem;
+    color: var(--smoke);
+    text-align: left;
+    letter-spacing: 0.01em;
+}
+
+.main-input:disabled {
+    cursor: default;
+}
+
+.main-input::placeholder {
+    color: rgba(74, 74, 74, 0.8);
+    transition: opacity 0.3s ease, color 0.4s ease;
+}
+
+.main-input:focus::placeholder {
+    opacity: 0.4;
+}
+
+/* Corner micro-accents */
+.portal-corner {
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.input-portal:focus-within .portal-corner {
+    opacity: 1;
+}
+
+.tl {
+    top: -1px;
+    left: -1px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.tr {
+    top: -1px;
+    right: -1px;
+    border-left: none;
+    border-bottom: none;
+}
+
+.bl {
+    bottom: -1px;
+    left: -1px;
+    border-right: none;
+    border-top: none;
+}
+
+.br {
+    bottom: -1px;
+    right: -1px;
+    border-left: none;
+    border-top: none;
+}
+
+/* ─────────────────────────────────────────────
+   Status Bar
+───────────────────────────────────────────── */
+.status-container {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--smoke);
+    transition: color 0.5s ease;
+    user-select: none;
+}
+
+.system-active .status-container {
+    color: rgba(232, 232, 232, 0.6);
+}
+
+.status-dot {
+    width: 5px;
+    height: 5px;
+    background: var(--smoke);
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* ─────────────────────────────────────────────
+   Processing Scan Bar
+───────────────────────────────────────────── */
+.processing-stage {
+    width: 100%;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(-3px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none;
+}
+
+.processing-stage.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.processing-bar {
+    width: 100%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 1px;
+    overflow: hidden;
+}
+
+.processing-fill {
+    height: 100%;
+    width: 0%;
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 1px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   THOUGHT ANATOMY
+   The core visual innovation of Phase 3.
+   Reads like an internal machine register, not a UI.
+   ═══════════════════════════════════════════════════════════ */
+
+.thought-anatomy {
+    width: 100%;
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+    transition:
+        opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+        transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.thought-anatomy.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* ─────────────────────────────────────────────
+   Thought Rows — the analysis registers
+───────────────────────────────────────────── */
+.anatomy-rows {
+    display: flex;
+    flex-direction: column;
+    padding: 0 0.25rem;
+}
+
+.thought-row {
+    display: grid;
+    grid-template-columns: 88px 24px 1fr;
+    grid-template-rows: auto auto;
+    align-items: baseline;
+    padding: 0.65rem 0;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition:
+        opacity 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+        transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+    /* Separator spans full width */
+    grid-template-areas:
+        "label arrow content"
+        "sep   sep   sep";
+}
+
+.thought-row.row-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.thought-label {
+    grid-area: label;
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: rgba(74, 74, 74, 0.9);
+    font-weight: 400;
+    padding-top: 0.05em;
+    /* optical alignment */
+    user-select: none;
+}
+
+.thought-arrow {
+    grid-area: arrow;
+    font-size: 0.65rem;
+    color: rgba(74, 74, 74, 0.4);
+    text-align: center;
+    user-select: none;
+}
+
+.thought-content {
+    grid-area: content;
+    font-size: 0.82rem;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    color: rgba(232, 232, 232, 0.8);
+    line-height: 1.5;
+    min-height: 1.2em;
+    /* prevent layout shift during typewrite */
+}
+
+.row-separator {
+    grid-area: sep;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.04);
+    margin-top: 0.65rem;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.row-separator.sep-visible {
+    transform: scaleX(1);
+}
+
+/* ─────────────────────────────────────────────
+   Synthesis Separator — the fold point
+   Thicker, brighter: marks the transition from
+   analysis to output. The only hierarchy break.
+───────────────────────────────────────────── */
+.synthesis-separator {
+    height: 1px;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.18) 30%,
+            rgba(255, 255, 255, 0.22) 50%,
+            rgba(255, 255, 255, 0.18) 70%,
+            transparent 100%);
+    margin: 0.5rem 0 0 0;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.synthesis-separator.sep-visible {
+    transform: scaleX(1);
+}
+
+/* ─────────────────────────────────────────────
+   Prompt Output Block
+   The crystallized result. Single left-border
+   accent is the only structural differentiator.
+───────────────────────────────────────────── */
+.prompt-output {
+    padding: 1.1rem 0 0.5rem 1.25rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 0.75rem;
+    opacity: 0;
+    transform: translateY(8px);
+    cursor: pointer;
+    /* Sin max-height ni overflow: el contenedor padre (.system-container) scrollea */
+    transition:
+        opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+        transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+        border-color 0.3s ease;
+}
+
+/* Los pseudo-elementos de scrollbar específicos ya no son necesarios aquí */
+
+.prompt-output.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.prompt-output:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.prompt-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.prompt-label {
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.3);
+    user-select: none;
+}
+
+.copy-hint {
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: rgba(255, 255, 255, 0.15);
+    opacity: 0;
+    transition: opacity 0.3s ease, color 0.3s ease;
+    user-select: none;
+}
+
+.prompt-output:hover .copy-hint {
+    opacity: 1;
+}
+
+.copy-hint.copied {
+    color: rgba(200, 220, 200, 0.7);
+    opacity: 1;
+}
+
+.prompt-text {
+    font-size: 0.83rem;
+    font-weight: 300;
+    line-height: 1.85;
+    color: rgba(232, 232, 232, 0.9);
+    letter-spacing: 0.01em;
+    min-height: 1.5rem;
+    /* white-space: pre-wrap eliminado — el contenido es HTML renderizado */
+}
+
+/* ─────────────────────────────────────────────
+   Markdown Rendered Elements
+   Diseño: limpio, oscuro, premium — coherente
+   con la identidad visual de VIREON.
+───────────────────────────────────────────── */
+
+.prompt-text .md-h1 {
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(232, 232, 232, 0.95);
+    margin: 1.2rem 0 0.5rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.prompt-text .md-h2 {
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: rgba(232, 232, 232, 0.85);
+    margin: 1rem 0 0.4rem;
+}
+
+.prompt-text .md-h3 {
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: rgba(200, 200, 200, 0.75);
+    margin: 0.8rem 0 0.3rem;
+}
+
+.prompt-text .md-p {
+    margin: 0;
+    line-height: 1.85;
+}
+
+.prompt-text .md-sep {
+    height: 0.6rem;
+}
+
+.prompt-text .md-ul,
+.prompt-text .md-ol {
+    padding-left: 1.2rem;
+    margin: 0.4rem 0;
+}
+
+.prompt-text .md-ul li,
+.prompt-text .md-ol li {
+    line-height: 1.75;
+    margin-bottom: 0.2rem;
+    color: rgba(220, 220, 220, 0.88);
+}
+
+.prompt-text .md-ul li::marker {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.prompt-text .md-ol li::marker {
+    color: rgba(255, 255, 255, 0.3);
+    font-variant-numeric: tabular-nums;
+}
+
+/* Bloque de código */
+.prompt-text .md-pre {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 6px;
+    padding: 0.85rem 1rem;
+    margin: 0.6rem 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.prompt-text .md-pre::-webkit-scrollbar {
+    display: none;
+}
+
+.prompt-text .md-code {
+    font-family: 'Menlo', 'Consolas', 'Monaco', monospace;
+    font-size: 0.76rem;
+    line-height: 1.6;
+    color: rgba(200, 220, 200, 0.85);
+    white-space: pre;
+    display: block;
+}
+
+/* Indicador de lenguaje en bloques de código */
+.prompt-text .md-pre[data-lang]::before {
+    content: attr(data-lang);
+    display: block;
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.2);
+    margin-bottom: 0.5rem;
+}
+
+.status-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 2rem;
+}
+
+/* ─────────────────────────────────────────────
+   Historial Visible
+───────────────────────────────────────────── */
+
+.history-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    /* Espacio antes del input portal */
+}
+
+.history-entry {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    width: 100%;
+    animation: fadeIn var(--duration-med) cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.history-user {
+    padding-left: 1.25rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(200, 200, 200, 0.8);
+    font-weight: 400;
+    font-size: 0.85rem;
+    line-height: 1.6;
+}
+
+.history-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.3);
+    margin-bottom: 0.4rem;
+}
+
+.history-ai {
+    padding-left: 1.25rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+    color: rgba(232, 232, 232, 0.9);
+}
+
+/* Animación para el history-entry nuevo */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Código inline */
+.prompt-text .md-ic {
+    font-family: 'Menlo', 'Consolas', 'Monaco', monospace;
+    font-size: 0.78rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 3px;
+    padding: 0.1em 0.4em;
+    color: rgba(200, 220, 200, 0.85);
+}
+
+/* Negritas e itálicas */
+.prompt-text strong {
+    font-weight: 500;
+    color: rgba(240, 240, 240, 0.98);
+}
+
+.prompt-text em {
+    font-style: italic;
+    color: rgba(220, 220, 220, 0.8);
+}
+
+.prompt-timestamp {
+    margin-top: 1rem;
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
+    color: rgba(255, 255, 255, 0.1);
+    font-variant-numeric: tabular-nums;
+}
+
+/* ─────────────────────────────────────────────
+   Error state — conexión fallida
+   Solo cambia el color del acento izquierdo.
+   El resto del diseño permanece intacto.
+───────────────────────────────────────────── */
+.prompt-output.error-state {
+    border-left-color: rgba(180, 100, 80, 0.35);
+}
+
+.prompt-output.error-state .prompt-text {
+    color: rgba(220, 180, 160, 0.75);
+}
