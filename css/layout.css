@@ -40,7 +40,7 @@
     gap: 2rem;
     width: 100%;
     max-width: 800px;
-    padding: 6rem 2rem 7.5rem;   /* padding vertical equilibrado para el centro del input */
+    padding: 6rem 2rem 10rem;   /* padding vertical equilibrado para elevar el bloque inferior */
     min-height: 100vh;         /* ocupa al menos la pantalla, crece con el contenido */
     transition: transform var(--duration-med) cubic-bezier(0.2, 0.8, 0.2, 1);
 }

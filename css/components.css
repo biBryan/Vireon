@@ -73,7 +73,6 @@
     border: 1px solid var(--glass-border);
     border-radius: 18px;
     padding: 1.4rem 2rem;
-    margin-top: auto;
     /* Anchors it to the bottom if there is free space */
     transition:
         padding 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
@@ -181,7 +180,8 @@
     text-transform: uppercase;
     letter-spacing: 0.25em;
     color: rgba(255, 255, 255, 0.2);
-    margin-bottom: 5.5rem; /* Precise spacing to center the input between status and bottom */
+    margin-top: auto; /* Push the whole bottom block (status + input) */
+    margin-bottom: 8rem; /* Perfectly balanced with the 10rem bottom padding (8 + 2 gap) */
     transition: color 0.5s ease;
     user-select: none;
     font-family: 'Orbitron', var(--font-primary);
