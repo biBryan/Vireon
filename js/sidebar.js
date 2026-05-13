@@ -26,13 +26,6 @@ const Sidebar = (() => {
         { icon: '？',  label: 'Ayuda',              action: 'help',     tooltip: 'Ayuda' },
         { icon: '◉',  label: 'Estado del sistema',  action: 'status',   tooltip: 'Estado' },
         { icon: '◈',  label: 'Modelo activo',       action: 'model',    tooltip: 'Modelo' },
-        { icon: '⊟',  label: 'Modo breve',          action: 'brief',    tooltip: 'Breve' },
-        { icon: '⊞',  label: 'Modo detallado',      action: 'detailed', tooltip: 'Detallado' },
-    ];
-
-    const PLACEHOLDERS = [
-        { icon: '⌕', label: 'Buscar',     badge: 'Próx.',  section: 'search' },
-        { icon: '◫', label: 'Biblioteca', badge: 'Próx.',  section: 'library' },
     ];
 
     const RECENT_PLACEHOLDERS = [
@@ -43,7 +36,6 @@ const Sidebar = (() => {
 
     let sidebarEl = null;
     let coreDisplayEl = null;
-    let statusWidgetEl = null;
     let isExpanded = false;
 
     // ── Build DOM ─────────────────────────────────────────────────
@@ -101,70 +93,32 @@ const Sidebar = (() => {
         `;
         content.appendChild(headerBranding);
 
-        // ── Status Widget
-        statusWidgetEl = document.createElement('div');
-        statusWidgetEl.className = 'sidebar-status-widget';
-        content.appendChild(statusWidgetEl);
-        _updateStatusWidget(); // Initial render
-
-        // Divider
-        content.appendChild(_divider());
-
-        // ── Mode Switcher
-        content.appendChild(_sectionLabel('Modo de Respuesta'));
-        
-        const modeSwitcher = document.createElement('div');
-        modeSwitcher.className = 'sidebar-mode-switcher';
-        const modes = [
-            { id: 'brief', label: 'Breve', tooltip: 'Respuestas directas' },
-            { id: 'normal', label: 'Normal', tooltip: 'Equilibrio estándar' },
-            { id: 'detailed', label: 'Detallado', tooltip: 'Respuestas exhaustivas' }
-        ];
-        
-        modes.forEach(mode => {
-            const btn = document.createElement('button');
-            btn.className = 'mode-btn';
-            btn.dataset.mode = mode.id;
-            btn.textContent = mode.label;
-            if (mode.id === 'normal') btn.classList.add('active'); // default
-            
-            btn.addEventListener('click', () => {
-                modeSwitcher.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                if (typeof CoreActions !== 'undefined') {
-                    CoreActions.setResponseMode(mode.id);
-                }
-            });
-            modeSwitcher.appendChild(btn);
-        });
-        content.appendChild(modeSwitcher);
-
         // Divider
         content.appendChild(_divider());
 
         // ── Acciones del Sistema
         content.appendChild(_sectionLabel('Sistema'));
 
-        const resetBtn = _createItem('＋', 'Restablecer Memoria', 'Limpia el contexto actual');
-        resetBtn.addEventListener('click', () => {
-            if (typeof CoreActions !== 'undefined') CoreActions.resetSession();
-            // Cierra el display si estaba abierto
-            if (coreDisplayEl) coreDisplayEl.classList.remove('active');
+        COMMANDS.forEach(cmd => {
+            const btn = _createItem(cmd.icon, cmd.label, cmd.tooltip);
+            btn.addEventListener('click', () => {
+                if (typeof CoreActions !== 'undefined') {
+                    if (cmd.action === 'clear') {
+                        CoreActions.resetSession();
+                        if (coreDisplayEl) coreDisplayEl.classList.remove('active');
+                    } else {
+                        const response = CoreActions.executeCommand(cmd.action);
+                        if (response && response.type === 'display' && coreDisplayEl) {
+                            const contentEl = coreDisplayEl.querySelector('.core-display-content');
+                            contentEl.innerHTML = (typeof Markdown !== 'undefined') ? Markdown.parse(response.content) : response.content;
+                            coreDisplayEl.classList.add('active');
+                            if (!isExpanded) _toggle();
+                        }
+                    }
+                }
+            });
+            content.appendChild(btn);
         });
-        content.appendChild(resetBtn);
-
-        const manualBtn = _createItem('？', 'Manual del Sistema', 'Guía de uso visual');
-        manualBtn.addEventListener('click', () => {
-            if (typeof CoreActions !== 'undefined' && typeof Markdown !== 'undefined') {
-                const manualMd = CoreActions.getSystemManual();
-                const contentEl = coreDisplayEl.querySelector('.core-display-content');
-                contentEl.innerHTML = Markdown.parse(manualMd);
-                
-                coreDisplayEl.classList.add('active');
-                if (!isExpanded) _toggle(); // Auto-expand
-            }
-        });
-        content.appendChild(manualBtn);
 
         // ── Core Display Panel
         coreDisplayEl = document.createElement('div');
@@ -205,12 +159,6 @@ const Sidebar = (() => {
         const recentList = document.createElement('div');
         recentList.className = 'sidebar-recent-placeholder';
 
-        const RECENT_PLACEHOLDERS = [
-            'Conversación anterior…',
-            'Diseño de interfaz…',
-            'Consulta de sistema…',
-        ];
-
         RECENT_PLACEHOLDERS.forEach(text => {
             const item = document.createElement('div');
             item.className = 'sidebar-recent-item sidebar-item';
@@ -236,49 +184,6 @@ const Sidebar = (() => {
 
         return sidebar;
     }
-
-    // ── Updaters ──────────────────────────────────────────────────
-    function _updateStatusWidget() {
-        if (!statusWidgetEl) return;
-        
-        const state = (typeof System !== 'undefined') ? System.state : 'IDLE';
-        const isDemo = (typeof API !== 'undefined' && API.backendAvailable === false);
-        const model = isDemo
-            ? 'No conectado'
-            : (typeof API !== 'undefined' && API.config?.model) ? API.config.model : 'Gemini 1.5 Flash';
-        const isBusy = ['SUBMITTING', 'ANALYZING', 'CRYSTALLIZING'].includes(state);
-        
-        let cacheEntries = 0;
-        if (typeof Cache !== 'undefined' && typeof Cache.getStats === 'function') {
-            cacheEntries = Cache.getStats().entries || 0;
-        }
-
-        const dotClass = isBusy ? 'status-dot busy' : isDemo ? 'status-dot demo' : 'status-dot idle';
-        const displayState = isDemo && state === 'IDLE' ? 'DEMO' : state;
-
-        statusWidgetEl.innerHTML = `
-            <div class="status-row">
-                <span class="status-label">ESTADO</span>
-                <div class="status-value">
-                    <div class="${dotClass}"></div>
-                    ${displayState}
-                </div>
-            </div>
-            <div class="status-row">
-                <span class="status-label">MODELO</span>
-                <span class="status-value">${model}</span>
-            </div>
-            <div class="status-row">
-                <span class="status-label">MEMORIA</span>
-                <span class="status-value">${cacheEntries} ENTRADAS</span>
-            </div>
-        `;
-    }
-
-    // Polling ligero para mantener el Status Widget actualizado
-    setInterval(() => {
-        if (isExpanded) _updateStatusWidget();
-    }, 1000);
 
     function _createItem(icon, label, tooltip) {
         const btn = document.createElement('button');
@@ -309,7 +214,6 @@ const Sidebar = (() => {
         isExpanded = !isExpanded;
 
         if (isExpanded) {
-            _updateStatusWidget();
             sidebarEl.classList.add('expanded');
             document.body.classList.add('sidebar-expanded');
         } else {
@@ -328,15 +232,14 @@ const Sidebar = (() => {
         const toggleBtn = document.getElementById('sidebar-toggle');
         toggleBtn.addEventListener('click', _toggle);
 
-        console.log('%c[ SIDEBAR ] Phase 8 — Core Panel Dashboard', 'color:#666;font-family:monospace;font-size:11px');
+        console.log('%c[ SIDEBAR ] Cleaned Structural Core', 'color:#666;font-family:monospace;font-size:11px');
     }
 
     // ── Public API ────────────────────────────────────────────────
     return {
         init,
         toggle: _toggle,
-        get isExpanded() { return isExpanded; },
-        updateStatus: _updateStatusWidget
+        get isExpanded() { return isExpanded; }
     };
 
 })();
