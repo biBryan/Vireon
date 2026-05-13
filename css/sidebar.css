@@ -1,49 +1,49 @@
 /* ═══════════════════════════════════════════════════════════
-   SIDEBAR.CSS — Phase 7C: Visual Polish
-   Collapsed: 52px  ·  Expanded: 272px
-   Toggle: click only  ·  Aesthetic: crystalline instrument panel
+   SIDEBAR.CSS — Phase 9: Neon Instrument Rail
+   Collapsed: 54px  ·  Expanded: 272px
+   Toggle: click only  ·  Aesthetic: luminous crystalline panel
    ═══════════════════════════════════════════════════════════ */
 
 /* ─────────────────────────────────────────────
    Design Tokens — Sidebar
-   Scoped variables for the panel. Reference
-   base.css tokens (--obsidian, --font-primary, etc.)
 ───────────────────────────────────────────── */
 :root {
-    --sidebar-collapsed: 52px;
+    --sidebar-collapsed: 54px;
     --sidebar-expanded: 272px;
-
-    /* Icon button dimensions */
-    --sidebar-icon-btn-size: 34px;
-    --sidebar-icon-btn-radius: 8px;
 
     /* Glass layers */
     --sidebar-bg: linear-gradient(
         180deg,
-        rgba(10, 12, 16, 0.88) 0%,
-        rgba(5, 6, 8, 0.96) 100%
+        rgba(8, 10, 14, 0.92) 0%,
+        rgba(4, 5, 8, 0.98) 50%,
+        rgba(6, 8, 12, 0.95) 100%
     );
-    --sidebar-blur: 40px;
+    --sidebar-blur: 48px;
 
-    /* Borders & edges — futuristic glow */
+    /* Accent glow color */
+    --sidebar-accent: 190, 220, 255;
+    --sidebar-accent-hex: #bedcff;
+    --sidebar-cyan: 0, 229, 255;
+
+    /* Borders & edges */
     --sidebar-border: rgba(255, 255, 255, 0.04);
-    --sidebar-edge-glow: 1px 0 0 rgba(255, 255, 255, 0.05),
-                          5px 0 25px rgba(0, 0, 0, 0.5);
-    --sidebar-edge-glow-expanded: 1px 0 0 rgba(255, 255, 255, 0.08),
-                                   inset -1px 0 20px rgba(0, 150, 255, 0.02),
-                                   10px 0 50px rgba(0, 0, 0, 0.5);
+    --sidebar-edge-glow: 1px 0 0 rgba(255, 255, 255, 0.06),
+                          4px 0 20px rgba(0, 0, 0, 0.5);
+    --sidebar-edge-glow-expanded: 1px 0 0 rgba(255, 255, 255, 0.09),
+                                   inset -1px 0 25px rgba(0, 150, 255, 0.03),
+                                   8px 0 40px rgba(0, 0, 0, 0.5);
 
     /* Interaction */
     --sidebar-hover: linear-gradient(90deg, rgba(255, 255, 255, 0.06) 0%, transparent 100%);
     --sidebar-active: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
 
-    /* Text hierarchy — improved contrast */
+    /* Text hierarchy */
     --sidebar-text: rgba(220, 220, 225, 0.75);
     --sidebar-text-bright: rgba(255, 255, 255, 0.95);
     --sidebar-text-dim: rgba(255, 255, 255, 0.25);
-    --sidebar-icon-color: rgba(210, 210, 220, 0.65);
+    --sidebar-icon-color: rgba(180, 190, 210, 0.5);
 
-    /* Motion — slightly slower for elegance */
+    /* Motion */
     --sidebar-transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -61,20 +61,22 @@
     background: var(--sidebar-bg);
     backdrop-filter: blur(var(--sidebar-blur));
     -webkit-backdrop-filter: blur(var(--sidebar-blur));
-    border-right: none;
+    border-right: 1px solid rgba(255, 255, 255, 0.03);
     box-shadow: var(--sidebar-edge-glow);
     z-index: 100;
     display: flex;
     flex-direction: column;
     overflow: hidden;
     transition: width var(--sidebar-transition),
-                box-shadow var(--sidebar-transition);
+                box-shadow var(--sidebar-transition),
+                border-color 0.4s ease;
     user-select: none;
 }
 
 .vireon-sidebar.expanded {
     width: var(--sidebar-expanded);
     box-shadow: var(--sidebar-edge-glow-expanded);
+    border-right-color: rgba(255, 255, 255, 0.05);
 }
 
 
@@ -107,6 +109,15 @@
     background: var(--sidebar-hover);
 }
 
+/* Collapsed toggle: subtle accent glow on hover */
+.vireon-sidebar:not(.expanded) .sidebar-toggle:hover {
+    background: radial-gradient(
+        circle at 50% 50%,
+        rgba(var(--sidebar-accent), 0.04) 0%,
+        transparent 70%
+    );
+}
+
 .sidebar-toggle:active {
     background: var(--sidebar-active);
 }
@@ -136,6 +147,12 @@
 
 .sidebar-toggle:hover .toggle-icon span {
     background: rgba(200, 200, 210, 0.65);
+}
+
+/* Collapsed toggle: icon bars glow subtly */
+.vireon-sidebar:not(.expanded) .sidebar-toggle:hover .toggle-icon span {
+    background: rgba(var(--sidebar-accent), 0.7);
+    box-shadow: 0 0 6px rgba(var(--sidebar-accent), 0.3);
 }
 
 /* → X morphing when expanded */
@@ -197,15 +214,21 @@
     background: linear-gradient(120deg, #ffffff 0%, #8a94a5 50%, #606a78 100%);
     -webkit-background-clip: text;
     background-clip: text;
-    padding: 0.5rem 0 0.75rem;
+    padding: 0.5rem 0 0.5rem;
     white-space: nowrap;
     position: relative;
-    height: 56px;
+    height: 42px;
     display: flex;
     align-items: center;
-    justify-content: center;
     pointer-events: none;
     user-select: none;
+    transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                padding 0.4s ease;
+}
+
+.vireon-sidebar.expanded .sidebar-branding {
+    height: 60px;
+    padding: 0.5rem 0 1rem;
 }
 
 .vireon-sidebar-wordmark {
@@ -221,34 +244,33 @@
     transition-delay: 0.05s;
 }
 
-/* Mini logo visible only when collapsed — container matches icon button language */
+/* Mini logo visible only when collapsed */
 .vireon-mini-logo {
     position: absolute;
     left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: var(--sidebar-icon-btn-size);
-    height: var(--sidebar-icon-btn-size);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 6px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: var(--sidebar-icon-btn-radius);
-    opacity: 0.55;
-    transition: opacity 0.3s ease, transform 0.4s ease, background 0.3s ease;
+    transform: translateX(-50%);
+    width: 22px;
+    height: auto;
+    opacity: 0.35;
+    transition: opacity 0.3s ease, transform 0.4s ease, filter 0.4s ease;
+    filter: drop-shadow(0 0 4px rgba(var(--sidebar-accent), 0.15));
+    animation: miniLogoBreathe 4s ease-in-out infinite;
 }
 
-.vireon-mini-logo:hover {
-    opacity: 0.7;
-    background: rgba(255, 255, 255, 0.05);
+@keyframes miniLogoBreathe {
+    0%, 100% { 
+        opacity: 0.3; 
+        filter: drop-shadow(0 0 3px rgba(var(--sidebar-accent), 0.1)); 
+    }
+    50% { 
+        opacity: 0.55; 
+        filter: drop-shadow(0 0 8px rgba(var(--sidebar-accent), 0.25)); 
+    }
 }
 
 .vireon-sidebar.expanded .vireon-mini-logo {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.8);
-    pointer-events: none;
+    transform: translateX(-50%) scale(0.8);
 }
 
 /* ─────────────────────────────────────────────
@@ -264,7 +286,9 @@
     padding: 0.85rem 1rem 0.35rem;
     white-space: nowrap;
     opacity: 0;
-    transition: opacity 0.25s ease;
+    transition: opacity 0.25s ease,
+                height 0.3s ease,
+                padding 0.3s ease;
     pointer-events: none;
     flex-shrink: 0;
 }
@@ -272,6 +296,14 @@
 .vireon-sidebar.expanded .sidebar-section-label {
     opacity: 1;
     transition-delay: 0.12s;
+}
+
+/* Collapsed: section labels collapse to zero */
+.vireon-sidebar:not(.expanded) .sidebar-section-label {
+    height: 0;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
 }
 
 
@@ -287,10 +319,10 @@
         rgba(255, 255, 255, 0.08) 70%,
         transparent 95%
     );
-    margin: 0.65rem 0.5rem;
+    margin: 0.8rem 0.5rem;
     flex-shrink: 0;
     position: relative;
-    transition: margin 0.3s ease, background 0.3s ease, width 0.3s ease;
+    transition: margin 0.3s ease, background 0.3s ease;
 }
 
 .sidebar-divider::after {
@@ -303,13 +335,13 @@
     transition: opacity 0.3s ease;
 }
 
-/* Collapsed state: dividers become a centered short line */
+/* Collapsed state: dividers become subtle dots */
 .vireon-sidebar:not(.expanded) .sidebar-divider {
-    margin: 0.5rem auto;
-    width: 22px;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.06);
-    border-radius: 1px;
+    margin: 0.35rem auto;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
 }
 
 .vireon-sidebar:not(.expanded) .sidebar-divider::after {
@@ -330,7 +362,7 @@
     height: 42px;
     min-height: 42px;
     padding: 0;
-    margin: 1px 0;
+    margin: 0.15rem 0;
     background: transparent;
     border: none;
     cursor: pointer;
@@ -346,10 +378,27 @@
                 margin 0.3s ease;
 }
 
+/* ── Collapsed: tighter spacing ── */
+.vireon-sidebar:not(.expanded) .sidebar-item {
+    height: 38px;
+    min-height: 38px;
+    margin: 0.05rem 0;
+}
+
 /* Hover — subtle background + left accent reveal */
 .sidebar-item:hover {
     background: var(--sidebar-hover);
     color: var(--sidebar-text-bright);
+}
+
+/* Collapsed hover: radial glow background */
+.vireon-sidebar:not(.expanded) .sidebar-item:hover {
+    background: radial-gradient(
+        circle at 50% 50%,
+        rgba(var(--sidebar-accent), 0.06) 0%,
+        rgba(var(--sidebar-accent), 0.02) 40%,
+        transparent 70%
+    );
 }
 
 .sidebar-item:active {
@@ -377,11 +426,30 @@
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
+/* Collapsed: left accent glows cyan */
+.vireon-sidebar:not(.expanded) .sidebar-item:hover::before {
+    height: 18px;
+    background: rgba(var(--sidebar-accent), 0.9);
+    box-shadow: 0 0 8px rgba(var(--sidebar-accent), 0.6),
+                0 0 20px rgba(var(--sidebar-accent), 0.25);
+}
+
+/* Collapsed: ambient glow behind icon via box-shadow */
+.vireon-sidebar:not(.expanded) .sidebar-item {
+    transition: background 0.3s ease,
+                color 0.25s ease,
+                margin 0.3s ease,
+                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.vireon-sidebar:not(.expanded) .sidebar-item:hover {
+    box-shadow: inset 0 0 20px rgba(var(--sidebar-accent), 0.06),
+                inset 0 0 40px rgba(var(--sidebar-accent), 0.03);
+}
+
 
 /* ─────────────────────────────────────────────
    Icon Area — anchored to collapsed width
-   Each icon sits inside a subtle rounded
-   container that reads as a button.
 ───────────────────────────────────────────── */
 .sidebar-item-icon {
     width: var(--sidebar-collapsed);
@@ -392,43 +460,27 @@
     justify-content: center;
     font-size: 1rem;
     flex-shrink: 0;
-    opacity: 0.55;
-    transition: opacity 0.25s ease, background 0.25s ease;
-    position: relative;
+    opacity: 0.45;
+    transition: opacity 0.35s ease,
+                transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                text-shadow 0.4s ease,
+                filter 0.4s ease;
 }
 
-/* Inner icon pill — visible container for the icon */
-.sidebar-item-icon::after {
-    content: '';
-    position: absolute;
-    width: var(--sidebar-icon-btn-size);
-    height: var(--sidebar-icon-btn-size);
-    border-radius: var(--sidebar-icon-btn-radius);
-    background: rgba(255, 255, 255, 0.0);
-    border: 1px solid transparent;
-    transition: background 0.25s ease, border-color 0.25s ease;
-    pointer-events: none;
-}
-
-/* Collapsed: show the icon pill as a subtle button container */
-.vireon-sidebar:not(.expanded) .sidebar-item-icon::after {
-    background: rgba(255, 255, 255, 0.025);
-    border-color: rgba(255, 255, 255, 0.04);
-}
-
-/* Hover: icon brightens, pill highlights */
 .sidebar-item:hover .sidebar-item-icon {
     opacity: 1;
+    transform: scale(1.15);
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
 }
 
-.sidebar-item:hover .sidebar-item-icon::after {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(255, 255, 255, 0.08);
-}
-
-/* Active press: subtle inset */
-.sidebar-item:active .sidebar-item-icon::after {
-    background: rgba(255, 255, 255, 0.08);
+/* ── Collapsed Glow Effect: icon lights up like a lamp ── */
+.vireon-sidebar:not(.expanded) .sidebar-item:hover .sidebar-item-icon {
+    opacity: 1;
+    transform: scale(1.25);
+    text-shadow: 0 0 8px rgba(var(--sidebar-accent), 0.7),
+                 0 0 20px rgba(var(--sidebar-accent), 0.4),
+                 0 0 40px rgba(var(--sidebar-accent), 0.15);
+    filter: drop-shadow(0 0 6px rgba(var(--sidebar-accent), 0.5));
 }
 
 
@@ -496,11 +548,7 @@
 .sidebar-item.active .sidebar-item-icon {
     opacity: 1;
     color: #00e5ff;
-}
-
-.sidebar-item.active .sidebar-item-icon::after {
-    background: rgba(0, 229, 255, 0.06);
-    border-color: rgba(0, 229, 255, 0.15);
+    text-shadow: 0 0 15px rgba(0, 229, 255, 0.6);
 }
 
 /* ═════════════════════════════════════════════
@@ -758,7 +806,7 @@
 
 .sidebar-footer {
     flex-shrink: 0;
-    padding: 0.35rem 0;
+    padding: 0.5rem 0;
     border-top: none;
     position: relative;
 }
@@ -777,13 +825,6 @@
         rgba(255, 255, 255, 0.05),
         transparent
     );
-    transition: left 0.3s ease, right 0.3s ease;
-}
-
-/* Collapsed: footer line matches rail width */
-.vireon-sidebar:not(.expanded) .sidebar-footer::before {
-    left: 25%;
-    right: 25%;
 }
 
 
@@ -814,24 +855,25 @@ body.sidebar-expanded .system-container {
 .sidebar-item[data-tooltip]::after {
     content: attr(data-tooltip);
     position: absolute;
-    left: calc(var(--sidebar-collapsed) + 8px);
+    left: calc(var(--sidebar-collapsed) + 10px);
     top: 50%;
-    transform: translateY(-50%) translateX(-2px);
-    background: rgba(12, 12, 14, 0.96);
-    border: 1px solid rgba(255, 255, 255, 0.07);
+    transform: translateY(-50%) translateX(-4px);
+    background: rgba(8, 10, 14, 0.97);
+    border: 1px solid rgba(var(--sidebar-accent), 0.15);
     color: var(--sidebar-text-bright);
     font-family: var(--font-primary);
     font-size: 0.6rem;
     font-weight: 300;
     letter-spacing: 0.05em;
-    padding: 0.3rem 0.65rem;
-    border-radius: 5px;
+    padding: 0.35rem 0.7rem;
+    border-radius: 6px;
     white-space: nowrap;
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 200;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5),
+                0 0 12px rgba(var(--sidebar-accent), 0.06);
 }
 
 /* Show tooltip only when collapsed */
@@ -871,11 +913,6 @@ body.sidebar-expanded .system-container {
 .sidebar-recent-item .sidebar-item-icon {
     font-size: 0.55rem;
     opacity: 0.2;
-}
-
-/* Recent items don't get the button pill */
-.sidebar-recent-item .sidebar-item-icon::after {
-    display: none;
 }
 
 .sidebar-recent-item .sidebar-item-label {
