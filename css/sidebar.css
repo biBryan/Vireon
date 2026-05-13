@@ -226,30 +226,32 @@
 }
 
 .vireon-sidebar-wordmark {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     width: 90px;
     height: auto;
     filter: drop-shadow(0 0 6px rgba(255,255,255,0.08));
     opacity: 0;
-    transform: none;
     transition: opacity 0.3s ease;
-    margin: 0; /* Remove manual offset for true centering */
+    margin: 0;
 }
 
 .vireon-sidebar.expanded .vireon-sidebar-wordmark {
     opacity: 1;
-    transform: translateX(0);
-    transition-delay: 0.1s;
 }
 
 /* Mini logo visible only when collapsed */
 .vireon-mini-logo {
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
+    top: 50%;
+    transform: translate(-50%, -50%);
     width: 22px;
     height: auto;
     opacity: 0.45;
-    transition: opacity 0.3s ease, transform 0.4s ease, filter 0.4s ease;
+    transition: opacity 0.3s ease;
     filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.1));
 }
 
@@ -257,8 +259,6 @@
 
 .vireon-sidebar.expanded .vireon-mini-logo {
     opacity: 0;
-    transform: translateX(-50%);
-    transition: opacity 0.15s ease;
 }
 
 /* ─────────────────────────────────────────────
@@ -271,12 +271,14 @@
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.16);
-    padding: 0.85rem 1rem 0.35rem;
+    padding: 0;
+    margin: 0.85rem 1rem 0.35rem; /* Use margins for stability */
+    height: 0.6rem; /* Force fixed height */
+    line-height: 0.6rem;
     white-space: nowrap;
+    overflow: hidden; /* Ensure no wrap jump */
     opacity: 0;
-    transition: opacity 0.25s ease,
-                height 0.3s ease,
-                padding 0.3s ease;
+    transition: opacity 0.25s ease;
     pointer-events: none;
     flex-shrink: 0;
 }
