@@ -214,34 +214,36 @@
     background: linear-gradient(120deg, #ffffff 0%, #8a94a5 50%, #606a78 100%);
     -webkit-background-clip: text;
     background-clip: text;
-    padding: 0.5rem 0 0.5rem;
+    padding: 0;
     white-space: nowrap;
     position: relative;
-    height: 42px;
+    height: 54px; /* Unified with toggle height */
     display: flex;
     align-items: center;
     pointer-events: none;
     user-select: none;
-    transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                padding 0.4s ease;
+    transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .vireon-sidebar.expanded .sidebar-branding {
-    height: 60px;
-    padding: 0.5rem 0 1rem;
+    height: 54px;
+    padding: 0;
 }
 
 .vireon-sidebar-wordmark {
+    width: 90px;
+    height: auto;
+    filter: drop-shadow(0 0 6px rgba(255,255,255,0.08));
     opacity: 0;
-    transform: translateX(10px);
-    transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    margin-left: 1rem;
+    transform: translateX(5px);
+    transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    margin-left: 1.2rem;
 }
 
 .vireon-sidebar.expanded .vireon-sidebar-wordmark {
     opacity: 1;
     transform: translateX(0);
-    transition-delay: 0.05s;
+    transition-delay: 0.1s;
 }
 
 /* Mini logo visible only when collapsed */
@@ -270,7 +272,8 @@
 
 .vireon-sidebar.expanded .vireon-mini-logo {
     opacity: 0;
-    transform: translateX(-50%) scale(0.8);
+    transform: translateX(-50%) scale(0.7);
+    transition: opacity 0.15s ease, transform 0.2s ease;
 }
 
 /* ─────────────────────────────────────────────
@@ -298,12 +301,10 @@
     transition-delay: 0.12s;
 }
 
-/* Collapsed: section labels collapse to zero */
+/* Collapsed: section labels hide without collapsing space to avoid jumping */
 .vireon-sidebar:not(.expanded) .sidebar-section-label {
-    height: 0;
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
 }
 
 
@@ -335,9 +336,9 @@
     transition: opacity 0.3s ease;
 }
 
-/* Collapsed state: dividers become subtle dots */
+/* Collapsed state: dividers stay in position */
 .vireon-sidebar:not(.expanded) .sidebar-divider {
-    margin: 0.35rem auto;
+    margin: 0.8rem auto;
     width: 4px;
     height: 4px;
     background: rgba(255, 255, 255, 0.1);
@@ -378,11 +379,11 @@
                 margin 0.3s ease;
 }
 
-/* ── Collapsed: tighter spacing ── */
+/* ── Collapsed: maintain vertical consistency ── */
 .vireon-sidebar:not(.expanded) .sidebar-item {
-    height: 38px !important;
-    min-height: 38px !important;
-    margin: 0.05rem 0 !important;
+    height: 42px !important;
+    min-height: 42px !important;
+    margin: 0.15rem 0 !important;
 }
 
 /* Hover — subtle background + left accent reveal */
@@ -473,11 +474,11 @@
     text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
 }
 
-/* ── Collapsed Glow Effect: icon lights up like a lamp ── */
+/* ── Collapsed Glow Effect: icon lights up without scale change ── */
 .vireon-sidebar:not(.expanded) .sidebar-item:hover .sidebar-item-icon {
     opacity: 1 !important;
     color: var(--sidebar-text-bright) !important;
-    transform: scale(1.25) !important;
+    transform: scale(1) !important; /* No jumping scale */
     text-shadow: 0 0 10px rgba(var(--sidebar-accent), 0.8),
                  0 0 25px rgba(var(--sidebar-accent), 0.5),
                  0 0 50px rgba(var(--sidebar-accent), 0.2) !important;
