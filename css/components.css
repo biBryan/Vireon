@@ -181,7 +181,7 @@
     text-transform: uppercase;
     letter-spacing: 0.25em;
     color: rgba(255, 255, 255, 0.2);
-    margin-bottom: 1.2rem;
+    margin-bottom: 5.5rem; /* Precise spacing to center the input between status and bottom */
     transition: color 0.5s ease;
     user-select: none;
     font-family: 'Orbitron', var(--font-primary);
