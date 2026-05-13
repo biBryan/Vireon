@@ -213,7 +213,7 @@ const Sidebar = (() => {
 
         RECENT_PLACEHOLDERS.forEach(text => {
             const item = document.createElement('div');
-            item.className = 'sidebar-recent-item';
+            item.className = 'sidebar-recent-item sidebar-item';
             item.innerHTML = `
                 <span class="sidebar-item-icon">○</span>
                 <span class="sidebar-item-label">${text}</span>
@@ -282,7 +282,7 @@ const Sidebar = (() => {
 
     function _createItem(icon, label, tooltip) {
         const btn = document.createElement('button');
-        btn.className = 'sidebar-item';
+        btn.className = 'sidebar-item operational-unit';
         btn.setAttribute('data-tooltip', tooltip);
         btn.innerHTML = `
             <span class="sidebar-item-icon">${icon}</span>
