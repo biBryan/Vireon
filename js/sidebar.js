@@ -71,23 +71,20 @@ const Sidebar = (() => {
                 <path d="M 25,25 L 50,75 L 75,25" fill="none" stroke="url(#vireon-silver)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
             <svg class="vireon-sidebar-wordmark" viewBox="0 0 540 100" xmlns="http://www.w3.org/2000/svg">
-                <g fill="none" stroke="url(#vireon-silver)" stroke-width="10" stroke-linecap="butt" stroke-linejoin="miter">
-                    <path d="M 30,20 L 56,75" />
-                    <path d="M 90,20 L 64,75" />
-                    <path d="M 130,20 L 130.01,45" />
-                    <path d="M 130,55 L 130.01,80" />
-                    <path d="M 170,20 L 170.01,80" />
-                    <path d="M 185,20 L 205,20 A 15,15 0 0,1 220,35 A 15,15 0 0,1 205,50 L 185,50" />
-                    <path d="M 200,60 L 220,80" />
-                    <path d="M 260,20 L 260.01,40" />
-                    <path d="M 260,60 L 260.01,80" />
-                    <path d="M 260,20 L 310,20.01" />
-                    <path d="M 275,50 L 300,50.01" />
-                    <path d="M 260,80 L 310,80.01" />
-                    <circle cx="380" cy="50" r="30" stroke-dasharray="173.5 15" stroke-dashoffset="-15" />
-                    <path d="M 450,35 L 450.01,80" />
-                    <path d="M 450,20 L 510,80" />
-                    <path d="M 510,20 L 510.01,65" />
+                <g fill="none" stroke="url(#vireon-silver)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M 35,25 L 60,85 L 85,25" />
+                    <path d="M 130,25 V 85" />
+                    <path d="M 175,25 V 85" />
+                    <path d="M 175,25 H 205 C 220,25 220,50 205,50 H 175" />
+                    <path d="M 190,50 L 215,85" />
+                    <path d="M 270,25 V 85" />
+                    <path d="M 270,25 H 315" />
+                    <path d="M 270,55 H 305" />
+                    <path d="M 270,85 H 315" />
+                    <path d="M 380,25 A 30,30 0 1,0 380,85" />
+                    <path d="M 380,25 A 30,30 0 0,1 410,55" />
+                    <path d="M 410,65 A 30,30 0 0,1 380,85" />
+                    <path d="M 460,25 L 515,85 V 25" />
                 </g>
             </svg>
         `;
