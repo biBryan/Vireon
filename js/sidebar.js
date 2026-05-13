@@ -74,16 +74,11 @@ const Sidebar = (() => {
                 <g fill="none" stroke="url(#vireon-silver)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M 35,25 L 60,85 L 85,25" />
                     <path d="M 130,25 V 85" />
-                    <path d="M 175,25 V 85" />
-                    <path d="M 175,25 H 205 C 220,25 220,50 205,50 H 175" />
-                    <path d="M 190,50 L 215,85" />
-                    <path d="M 270,25 V 85" />
+                    <path d="M 175,85 V 25 H 210 L 190,55 L 220,85" />
                     <path d="M 270,25 H 315" />
-                    <path d="M 270,55 H 305" />
+                    <path d="M 270,55 H 315" />
                     <path d="M 270,85 H 315" />
-                    <path d="M 380,25 A 30,30 0 1,0 380,85" />
-                    <path d="M 380,25 A 30,30 0 0,1 410,55" />
-                    <path d="M 410,65 A 30,30 0 0,1 380,85" />
+                    <path d="M 365,75 A 30,30 0 1,1 395,75" />
                     <path d="M 460,25 L 515,85 V 25" />
                 </g>
             </svg>
