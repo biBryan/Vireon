@@ -73,8 +73,8 @@
     border: 1px solid var(--glass-border);
     border-radius: 18px;
     padding: 1.4rem 2rem;
-    margin-top: auto;
-    margin-bottom: auto; /* Dynamically center between status and bottom */
+    margin-top: 0.8rem; /* Tight gap with status */
+    margin-bottom: 8vh; /* Elevate from bottom for better balance */
     transition:
         padding 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
         border-color 0.5s ease,
@@ -181,7 +181,7 @@
     text-transform: uppercase;
     letter-spacing: 0.25em;
     color: rgba(255, 255, 255, 0.2);
-    margin-top: auto; /* Push away from history */
+    margin-top: auto;
     margin-bottom: 0;
     transition: color 0.5s ease;
     user-select: none;
