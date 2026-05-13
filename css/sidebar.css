@@ -214,6 +214,7 @@
     height: 54px; /* Unified with toggle height */
     display: flex;
     align-items: center;
+    justify-content: center; /* Center everything */
     pointer-events: none;
     user-select: none;
     transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -229,9 +230,9 @@
     height: auto;
     filter: drop-shadow(0 0 6px rgba(255,255,255,0.08));
     opacity: 0;
-    transform: translateX(5px);
-    transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    margin-left: 1.2rem;
+    transform: none;
+    transition: opacity 0.3s ease;
+    margin: 0; /* Remove manual offset for true centering */
 }
 
 .vireon-sidebar.expanded .vireon-sidebar-wordmark {
@@ -297,17 +298,12 @@
 ───────────────────────────────────────────── */
 .sidebar-divider {
     height: 1px;
-    background: linear-gradient(
-        90deg,
-        transparent 5%,
-        rgba(255, 255, 255, 0.08) 30%,
-        rgba(255, 255, 255, 0.08) 70%,
-        transparent 95%
-    );
-    margin: 0.8rem 0.5rem;
+    width: 32px; /* Fixed length */
+    background: rgba(255, 255, 255, 0.12);
+    margin: 1.2rem auto; /* Perfectly centered and stable */
     flex-shrink: 0;
     position: relative;
-    transition: margin 0.3s ease, background 0.3s ease;
+    transition: opacity 0.3s ease;
 }
 
 .sidebar-divider::after {
@@ -320,17 +316,9 @@
     transition: opacity 0.3s ease;
 }
 
-/* Collapsed state: dividers stay in position */
+/* Dividers are now stable and fixed-length in all states */
 .vireon-sidebar:not(.expanded) .sidebar-divider {
-    margin: 0.8rem auto;
-    width: 4px;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-}
-
-.vireon-sidebar:not(.expanded) .sidebar-divider::after {
-    opacity: 0;
+    margin: 1.2rem auto;
 }
 
 
