@@ -22,10 +22,15 @@
     width: 320px;
     height: auto;
     max-width: 100%;
-    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.10));
-    animation: float 8s ease-in-out infinite;
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.05));
+    animation: subtle-drift 12s ease-in-out infinite;
     user-select: none;
     margin: 0;
+}
+
+@keyframes subtle-drift {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
 }
 
 /* @keyframes shine and pulse-width removed — no active usage (wordmark residues) */
@@ -169,14 +174,17 @@
 ───────────────────────────────────────────── */
 .status-container {
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 0.7rem;
-    font-size: 0.7rem;
+    gap: 0.6rem;
+    font-size: 0.65rem;
     text-transform: uppercase;
-    letter-spacing: 0.22em;
-    color: var(--smoke);
+    letter-spacing: 0.25em;
+    color: rgba(255, 255, 255, 0.2);
+    margin-bottom: 1.2rem;
     transition: color 0.5s ease;
     user-select: none;
+    font-family: 'Orbitron', var(--font-primary);
 }
 
 .system-active .status-container {
