@@ -179,19 +179,9 @@
 
 .sidebar-content::-webkit-scrollbar { display: none; }
 
-/* Subtle top separator after toggle */
+/* Top spacing is now handled by the first divider in JS or consistent margins */
 .sidebar-content::before {
-    content: '';
-    display: block;
-    height: 1px;
-    background: linear-gradient(
-        90deg,
-        transparent 10%,
-        rgba(255, 255, 255, 0.05) 50%,
-        transparent 90%
-    );
-    margin: 0 0.5rem 0.35rem;
-    flex-shrink: 0;
+    display: none;
 }
 
 
@@ -210,12 +200,13 @@
     padding: 0;
     white-space: nowrap;
     position: relative;
-    height: 54px; /* Unified with toggle height */
+    height: 54px; 
     display: flex;
     align-items: center;
-    justify-content: center; /* Center everything */
+    justify-content: center;
     pointer-events: none;
     user-select: none;
+    margin: 0; /* Centering handled by surrounding dividers */
     transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -299,22 +290,18 @@
 ───────────────────────────────────────────── */
 .sidebar-divider {
     height: 1px;
-    width: 24px; /* Minimal collapsed presence */
+    width: 24px;
     background: linear-gradient(90deg, 
         transparent 0%, 
         rgba(255, 255, 255, 0.12) 50%, 
         transparent 100%
     );
-    margin: 1.5rem auto;
+    margin: 0.8rem auto; /* Symmetrical and compact */
     flex-shrink: 0;
     position: relative;
     transition: width var(--sidebar-transition), 
                 background var(--sidebar-transition),
                 opacity 0.3s ease;
-}
-
-.sidebar-divider::after {
-    display: none; /* Removed hard center tick for a cleaner look */
 }
 
 /* Expanded state: elegant fluid line */
@@ -328,10 +315,6 @@
         rgba(255, 255, 255, 0.04) 85%, 
         transparent 100%
     );
-}
-
-.vireon-sidebar:not(.expanded) .sidebar-divider {
-    margin: 1.5rem auto;
 }
 
 

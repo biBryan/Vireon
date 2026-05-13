@@ -63,7 +63,9 @@ const Sidebar = (() => {
         const content = document.createElement('div');
         content.className = 'sidebar-content';
 
-        // ── Header Branding
+        // ── Header Branding (Centered between two dividers)
+        content.appendChild(_divider());
+        
         const headerBranding = document.createElement('div');
         headerBranding.className = 'sidebar-branding';
         headerBranding.innerHTML = `
