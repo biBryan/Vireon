@@ -72,14 +72,14 @@ const Sidebar = (() => {
             </svg>
             <svg class="vireon-sidebar-wordmark" viewBox="0 0 540 100" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" stroke="url(#vireon-silver)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M 35,25 L 60,85 L 85,25" />
-                    <path d="M 130,25 V 85" />
-                    <path d="M 175,85 V 25 H 210 L 190,55 L 220,85" />
-                    <path d="M 270,25 H 315" />
-                    <path d="M 270,55 H 315" />
-                    <path d="M 270,85 H 315" />
-                    <path d="M 365,75 A 30,30 0 1,1 395,75" />
-                    <path d="M 460,25 L 515,85 V 25" />
+                    <path d="M 60,25 L 85,85 L 110,25" />
+                    <path d="M 150,25 V 85" />
+                    <path d="M 190,85 V 25 H 225 L 205,55 L 235,85" />
+                    <path d="M 275,25 H 320" />
+                    <path d="M 275,55 H 320" />
+                    <path d="M 275,85 H 320" />
+                    <path d="M 355,75 A 25,25 0 1,1 385,75" />
+                    <path d="M 430,25 L 485,85 V 25" />
                 </g>
             </svg>
         `;
