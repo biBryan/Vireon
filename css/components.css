@@ -62,17 +62,8 @@
 }
 
 /* ─────────────────────────────────────────────
-   System Footer & Input Portal
+   Input Portal
 ───────────────────────────────────────────── */
-.system-footer {
-    margin-top: auto;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 240px; /* Dedicated dynamic space for the footer block */
-    padding-bottom: 2rem; /* Safety buffer for mobile/edge cases */
-}
 .input-portal {
     position: relative;
     width: 100%;
@@ -82,7 +73,8 @@
     border: 1px solid var(--glass-border);
     border-radius: 18px;
     padding: 1.4rem 2rem;
-    margin: auto 0;
+    margin-top: auto;
+    margin-bottom: auto; /* Dynamically center between status and bottom */
     transition:
         padding 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
         border-color 0.5s ease,
@@ -189,8 +181,8 @@
     text-transform: uppercase;
     letter-spacing: 0.25em;
     color: rgba(255, 255, 255, 0.2);
-    margin: 0; /* No fixed margins in dynamic block */
-    padding-top: 1rem;
+    margin-top: auto; /* Push away from history */
+    margin-bottom: 0;
     transition: color 0.5s ease;
     user-select: none;
     font-family: 'Orbitron', var(--font-primary);
@@ -539,16 +531,7 @@
     margin-bottom: 0.5rem;
 }
 
-.status-container {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.4);
-    margin-bottom: 2rem;
-}
+/* Redundant definition removed */
 
 /* ─────────────────────────────────────────────
    Historial Visible
