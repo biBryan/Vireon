@@ -827,20 +827,47 @@ body.sidebar-expanded .sidebar-smoke-aura {
     content: '';
     position: absolute;
     top: 0;
-    left: -20px; /* Solapa más bajo el sidebar para que las curvas salgan de forma natural */
+    left: 0; /* Pegado exactamente al panel */
     width: 100%;
     height: 200vh; /* Altura doble para scroll infinito */
     
-    /* Vector SVG de Nube/Espuma Anime (Masas redondas, conectadas, núcleo sólido) */
-    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='600' viewBox='0 0 60 600'%3E%3Cg fill='%23ffffff' opacity='0.95'%3E%3Crect x='-30' y='0' width='55' height='600'/%3E%3Ccircle cx='25' cy='0' r='15'/%3E%3Ccircle cx='25' cy='35' r='20'/%3E%3Ccircle cx='30' cy='85' r='25'/%3E%3Ccircle cx='22' cy='135' r='18'/%3E%3Ccircle cx='28' cy='180' r='22'/%3E%3Ccircle cx='32' cy='235' r='28'/%3E%3Ccircle cx='24' cy='290' r='20'/%3E%3Ccircle cx='30' cy='340' r='25'/%3E%3Ccircle cx='22' cy='390' r='18'/%3E%3Ccircle cx='33' cy='445' r='26'/%3E%3Ccircle cx='28' cy='505' r='22'/%3E%3Ccircle cx='24' cy='560' r='18'/%3E%3Ccircle cx='25' cy='600' r='15'/%3E%3Ccircle cx='38' cy='20' r='10'/%3E%3Ccircle cx='42' cy='65' r='14'/%3E%3Ccircle cx='45' cy='115' r='12'/%3E%3Ccircle cx='35' cy='160' r='10'/%3E%3Ccircle cx='40' cy='210' r='15'/%3E%3Ccircle cx='48' cy='265' r='12'/%3E%3Ccircle cx='36' cy='315' r='14'/%3E%3Ccircle cx='44' cy='370' r='16'/%3E%3Ccircle cx='35' cy='420' r='10'/%3E%3Ccircle cx='46' cy='475' r='14'/%3E%3Ccircle cx='40' cy='535' r='12'/%3E%3Ccircle cx='38' cy='585' r='10'/%3E%3Ccircle cx='52' cy='40' r='3'/%3E%3Ccircle cx='55' cy='140' r='4'/%3E%3Ccircle cx='50' cy='240' r='2'/%3E%3Ccircle cx='58' cy='340' r='3'/%3E%3Ccircle cx='53' cy='450' r='4'/%3E%3Ccircle cx='56' cy='510' r='2'/%3E%3C/g%3E%3C/svg%3E");
-    background-size: 60px 600px;
+    /* Espuma Anime Parallax: Capas de grupos de nubes conectadas al borde (x=0) */
+    background-image: 
+        /* Capa 1: Nubes grandes base (Lentas, fondo) */
+        radial-gradient(circle at 0px 50px, #ffffff 0%, #ffffff 25px, transparent 26px),
+        radial-gradient(circle at 10px 80px, #ffffff 0%, #ffffff 20px, transparent 21px),
+        radial-gradient(circle at 0px 300px, #ffffff 0%, #ffffff 30px, transparent 31px),
+        radial-gradient(circle at 15px 330px, #ffffff 0%, #ffffff 18px, transparent 19px),
+        radial-gradient(circle at 5px 360px, #ffffff 0%, #ffffff 22px, transparent 23px),
+        
+        /* Capa 2: Nubes medianas (Velocidad media) */
+        radial-gradient(circle at 0px 100px, #ffffff 0%, #ffffff 20px, transparent 21px),
+        radial-gradient(circle at 12px 125px, #ffffff 0%, #ffffff 15px, transparent 16px),
+        radial-gradient(circle at 0px 350px, #ffffff 0%, #ffffff 25px, transparent 26px),
+        radial-gradient(circle at 8px 380px, #ffffff 0%, #ffffff 18px, transparent 19px),
+        radial-gradient(circle at 0px 410px, #ffffff 0%, #ffffff 12px, transparent 13px),
+        
+        /* Capa 3: Espuma pequeña y satélites (Rápida, frente) */
+        radial-gradient(circle at 0px 40px, #ffffff 0%, #ffffff 12px, transparent 13px),
+        radial-gradient(circle at 8px 55px, #ffffff 0%, #ffffff 8px, transparent 9px),
+        radial-gradient(circle at 25px 180px, #ffffff 0%, #ffffff 4px, transparent 5px),
+        radial-gradient(circle at 15px 250px, #ffffff 0%, #ffffff 10px, transparent 11px),
+        radial-gradient(circle at 20px 400px, #ffffff 0%, #ffffff 6px, transparent 7px);
+        
+    background-size: 
+        /* Capa 1 (Altura 600px) */ 
+        60px 600px, 60px 600px, 60px 600px, 60px 600px, 60px 600px,
+        /* Capa 2 (Altura 500px) */ 
+        60px 500px, 60px 500px, 60px 500px, 60px 500px, 60px 500px,
+        /* Capa 3 (Altura 400px) */ 
+        60px 400px, 60px 400px, 60px 400px, 60px 400px, 60px 400px;
+        
     background-repeat: repeat-y;
-    
-    opacity: 1.0; /* Blanco muy fuerte y puro */
+    opacity: 0.95;
     
     /* Glow sutil para integración sin perder la solidez de la forma */
-    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.25));
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
     
-    /* Animación infinita hacia arriba */
-    animation: animeSmokeVector 8s linear infinite;
+    /* Animación parallax */
+    animation: animeSmokeParallax 15s linear infinite;
 }
