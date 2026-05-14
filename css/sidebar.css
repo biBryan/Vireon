@@ -846,6 +846,7 @@ body.sidebar-expanded .sidebar-smoke-aura {
         radial-gradient(circle at 10px 550px, #ffffff 0%, #ffffff 15px, transparent 16px),
         
         /* Capa 2: Nubes medianas (Velocidad media) - Desplazadas 20px arriba */
+        radial-gradient(circle at 0px 5px, #ffffff 0%, #ffffff 15px, transparent 16px), /* Extra top */
         radial-gradient(circle at 0px 40px, #ffffff 0%, #ffffff 20px, transparent 21px),
         radial-gradient(circle at 12px 70px, #ffffff 0%, #ffffff 15px, transparent 16px),
         radial-gradient(circle at 0px 200px, #ffffff 0%, #ffffff 25px, transparent 26px),
@@ -856,6 +857,8 @@ body.sidebar-expanded .sidebar-smoke-aura {
         radial-gradient(circle at 5px 490px, #ffffff 0%, #ffffff 12px, transparent 13px),
         
         /* Capa 3: Espuma pequeña y satélites (Rápida, frente) - Desplazadas 15px arriba */
+        radial-gradient(circle at 10px 0px, #ffffff 0%, #ffffff 8px, transparent 9px), /* Extra top */
+        radial-gradient(circle at 0px 10px, #ffffff 0%, #ffffff 10px, transparent 11px), /* Extra top */
         radial-gradient(circle at 0px 25px, #ffffff 0%, #ffffff 12px, transparent 13px),
         radial-gradient(circle at 8px 40px, #ffffff 0%, #ffffff 8px, transparent 9px),
         radial-gradient(circle at 20px 105px, #ffffff 0%, #ffffff 6px, transparent 7px),
@@ -867,10 +870,10 @@ body.sidebar-expanded .sidebar-smoke-aura {
     background-size: 
         /* Capa 1 (10 gradientes, Altura 600px) */ 
         60px 600px, 60px 600px, 60px 600px, 60px 600px, 60px 600px, 60px 600px, 60px 600px, 60px 600px, 60px 600px, 60px 600px,
-        /* Capa 2 (8 gradientes, Altura 500px) */ 
-        60px 500px, 60px 500px, 60px 500px, 60px 500px, 60px 500px, 60px 500px, 60px 500px, 60px 500px,
-        /* Capa 3 (7 gradientes, Altura 400px) */ 
-        60px 400px, 60px 400px, 60px 400px, 60px 400px, 60px 400px, 60px 400px, 60px 400px;
+        /* Capa 2 (9 gradientes, Altura 500px) */ 
+        60px 500px, 60px 500px, 60px 500px, 60px 500px, 60px 500px, 60px 500px, 60px 500px, 60px 500px, 60px 500px,
+        /* Capa 3 (9 gradientes, Altura 400px) */ 
+        60px 400px, 60px 400px, 60px 400px, 60px 400px, 60px 400px, 60px 400px, 60px 400px, 60px 400px, 60px 400px;
         
     background-repeat: repeat-y;
     opacity: 0.95;

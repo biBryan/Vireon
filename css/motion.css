@@ -140,18 +140,18 @@
         background-position: 
             /* Capa 1 (10 items) */
             0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px,
-            /* Capa 2 (8 items) */
-            0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px,
-            /* Capa 3 (7 items) */
-            0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
+            /* Capa 2 (9 items) */
+            0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px,
+            /* Capa 3 (9 items) */
+            0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
     }
     100% {
         background-position: 
-            /* Capa 1: Lenta (múltiplo exacto de 600px) */
+            /* Capa 1: Lenta (múltiplo exacto de 600px, 10 items) */
             0px -600px, 0px -600px, 0px -600px, 0px -600px, 0px -600px, 0px -600px, 0px -600px, 0px -600px, 0px -600px, 0px -600px,
-            /* Capa 2: Media (múltiplo exacto de 500px) */
-            0px -1000px, 0px -1000px, 0px -1000px, 0px -1000px, 0px -1000px, 0px -1000px, 0px -1000px, 0px -1000px,
-            /* Capa 3: Rápida (múltiplo exacto de 400px) */
-            0px -1200px, 0px -1200px, 0px -1200px, 0px -1200px, 0px -1200px, 0px -1200px, 0px -1200px;
+            /* Capa 2: Media (múltiplo exacto de 500px, 9 items) */
+            0px -1000px, 0px -1000px, 0px -1000px, 0px -1000px, 0px -1000px, 0px -1000px, 0px -1000px, 0px -1000px, 0px -1000px,
+            /* Capa 3: Rápida (múltiplo exacto de 400px, 9 items) */
+            0px -1200px, 0px -1200px, 0px -1200px, 0px -1200px, 0px -1200px, 0px -1200px, 0px -1200px, 0px -1200px, 0px -1200px;
     }
 }
