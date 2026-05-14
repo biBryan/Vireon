@@ -138,17 +138,20 @@
 @keyframes animeSmokeParallax {
     0% {
         background-position: 
-            0px 0px, 0px 0px, 0px 0px,
-            0px 0px, 0px 0px, 0px 0px, 0px 0px,
-            0px 0px, 0px 0px, 0px 0px;
+            /* Capa 1 (10 items) */
+            0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px,
+            /* Capa 2 (8 items) */
+            0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px,
+            /* Capa 3 (7 items) */
+            0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
     }
     100% {
         background-position: 
-            /* Capa 1: Rápida (múltiplo de 300px) */
-            0px -900px, 0px -900px, 0px -900px,
-            /* Capa 2: Media (múltiplo de 400px) */
-            0px -800px, 0px -800px, 0px -800px, 0px -800px,
-            /* Capa 3: Lenta (múltiplo de 600px) */
-            0px -600px, 0px -600px, 0px -600px;
+            /* Capa 1: Lenta (múltiplo exacto de 600px) */
+            0px -600px, 0px -600px, 0px -600px, 0px -600px, 0px -600px, 0px -600px, 0px -600px, 0px -600px, 0px -600px, 0px -600px,
+            /* Capa 2: Media (múltiplo exacto de 500px) */
+            0px -1000px, 0px -1000px, 0px -1000px, 0px -1000px, 0px -1000px, 0px -1000px, 0px -1000px, 0px -1000px,
+            /* Capa 3: Rápida (múltiplo exacto de 400px) */
+            0px -1200px, 0px -1200px, 0px -1200px, 0px -1200px, 0px -1200px, 0px -1200px, 0px -1200px;
     }
 }
