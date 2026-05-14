@@ -802,3 +802,61 @@ body.sidebar-expanded .system-container {
         padding-left: 0 !important;
     }
 }
+
+/* ─────────────────────────────────────────────
+   Anime Smoke Aura — Vertical Wave
+───────────────────────────────────────────── */
+.sidebar-smoke-aura {
+    position: absolute;
+    top: 0;
+    left: var(--sidebar-collapsed);
+    width: 50px;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 90; /* Detrás del sidebar, pero delante del fondo */
+    transition: left var(--sidebar-transition), width var(--sidebar-transition);
+    overflow: hidden;
+    /* Máscara para que el humo se difumine suavemente hacia la derecha */
+    -webkit-mask-image: linear-gradient(90deg, #000 0%, transparent 100%);
+    mask-image: linear-gradient(90deg, #000 0%, transparent 100%);
+}
+
+body.sidebar-expanded .sidebar-smoke-aura {
+    left: var(--sidebar-expanded);
+    width: 60px; /* Un poco más ancho cuando está expandido */
+}
+
+.sidebar-smoke-aura::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -10px; /* Solapa ligeramente bajo el sidebar */
+    width: 100%;
+    height: 200vh; /* Altura doble para scroll infinito */
+    
+    /* Diseño de Nube y Llama Anime: Blanco fuerte, formas combinadas */
+    background-image: 
+        /* Bases de nube (redondas, grandes) */
+        radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.4) 0%, transparent 50%),
+        radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.3) 0%, transparent 60%),
+        /* Puntas de llama (alargadas, finas) */
+        radial-gradient(ellipse at 40% 80%, rgba(255, 255, 255, 0.5) 0%, transparent 40%),
+        radial-gradient(ellipse at 60% 40%, rgba(255, 255, 255, 0.4) 0%, transparent 50%),
+        /* Destellos extra blancos */
+        radial-gradient(circle at 50% 10%, rgba(255, 255, 255, 0.6) 0%, transparent 30%);
+        
+    background-size: 
+        160px 200px, 
+        140px 240px, 
+        80px 300px, 
+        100px 350px, 
+        60px 180px;
+        
+    background-repeat: repeat-y;
+    
+    /* Blur controlado para dar efecto humo/vapor sin perder la forma */
+    filter: blur(5px);
+    
+    /* Animación infinita hacia arriba */
+    animation: animeSmoke 8s linear infinite;
+}

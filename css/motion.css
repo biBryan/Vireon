@@ -131,3 +131,11 @@
     background-size: 200% 100%;
     animation: shimmer 1s linear infinite;
 }
+
+/* ─────────────────────────────────────────────
+   Anime Smoke Rising Wave
+───────────────────────────────────────────── */
+@keyframes animeSmoke {
+    0% { background-position: 0px 0px, 0px 0px, 0px 0px; }
+    100% { background-position: 0px -300px, 0px -250px, 0px -350px; }
+}

@@ -36,6 +36,7 @@ const Sidebar = (() => {
 
     let sidebarEl = null;
     let coreDisplayEl = null;
+    let auraEl = null;
     let isExpanded = false;
 
     // ── Build DOM ─────────────────────────────────────────────────
@@ -209,9 +210,11 @@ const Sidebar = (() => {
 
         if (isExpanded) {
             sidebarEl.classList.add('expanded');
+            if (auraEl) auraEl.classList.add('expanded');
             document.body.classList.add('sidebar-expanded');
         } else {
             sidebarEl.classList.remove('expanded');
+            if (auraEl) auraEl.classList.remove('expanded');
             document.body.classList.remove('sidebar-expanded');
         }
     }
@@ -220,13 +223,18 @@ const Sidebar = (() => {
     function init() {
         sidebarEl = _buildSidebar();
 
+        auraEl = document.createElement('div');
+        auraEl.className = 'sidebar-smoke-aura';
+        auraEl.setAttribute('aria-hidden', 'true');
+
         const body = document.getElementById('system-body');
         body.insertBefore(sidebarEl, body.querySelector('.system-container'));
+        body.insertBefore(auraEl, body.querySelector('.system-container'));
 
         const toggleBtn = document.getElementById('sidebar-toggle');
         toggleBtn.addEventListener('click', _toggle);
 
-        console.log('%c[ SIDEBAR ] Cleaned Structural Core', 'color:#666;font-family:monospace;font-size:11px');
+        console.log('%c[ SIDEBAR ] Cleaned Structural Core + Aura', 'color:#666;font-family:monospace;font-size:11px');
     }
 
     // ── Public API ────────────────────────────────────────────────
