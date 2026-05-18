@@ -835,36 +835,36 @@ body.sidebar-expanded .sidebar-smoke-aura {
     background-image: 
         /* Capa 1: Nubes grandes base (Lentas, fondo) - Desplazadas 30px arriba */
         radial-gradient(circle at 0px 20px, #ffffff 0%, #ffffff 25px, transparent 26px),
-        radial-gradient(circle at 10px 50px, #ffffff 0%, #ffffff 20px, transparent 21px),
+        radial-gradient(circle at 15px 47px, #ffffff 0%, #ffffff 20px, transparent 21px),
         radial-gradient(circle at 0px 150px, #ffffff 0%, #ffffff 22px, transparent 23px),
-        radial-gradient(circle at 12px 180px, #ffffff 0%, #ffffff 18px, transparent 19px),
+        radial-gradient(circle at 18px 175px, #ffffff 0%, #ffffff 18px, transparent 19px),
         radial-gradient(circle at 0px 280px, #ffffff 0%, #ffffff 28px, transparent 29px),
-        radial-gradient(circle at 8px 310px, #ffffff 0%, #ffffff 20px, transparent 21px),
+        radial-gradient(circle at 14px 307px, #ffffff 0%, #ffffff 20px, transparent 21px),
         radial-gradient(circle at 0px 420px, #ffffff 0%, #ffffff 24px, transparent 25px),
-        radial-gradient(circle at 15px 450px, #ffffff 0%, #ffffff 16px, transparent 17px),
+        radial-gradient(circle at 22px 446px, #ffffff 0%, #ffffff 16px, transparent 17px),
         radial-gradient(circle at 0px 520px, #ffffff 0%, #ffffff 20px, transparent 21px),
-        radial-gradient(circle at 10px 550px, #ffffff 0%, #ffffff 15px, transparent 16px),
+        radial-gradient(circle at 16px 547px, #ffffff 0%, #ffffff 15px, transparent 16px),
         
         /* Capa 2: Nubes medianas (Velocidad media) - Desplazadas 20px arriba */
         radial-gradient(circle at 0px 5px, #ffffff 0%, #ffffff 15px, transparent 16px), /* Extra top */
         radial-gradient(circle at 0px 40px, #ffffff 0%, #ffffff 20px, transparent 21px),
-        radial-gradient(circle at 12px 70px, #ffffff 0%, #ffffff 15px, transparent 16px),
+        radial-gradient(circle at 20px 66px, #ffffff 0%, #ffffff 15px, transparent 16px),
         radial-gradient(circle at 0px 200px, #ffffff 0%, #ffffff 25px, transparent 26px),
-        radial-gradient(circle at 8px 230px, #ffffff 0%, #ffffff 18px, transparent 19px),
+        radial-gradient(circle at 18px 226px, #ffffff 0%, #ffffff 18px, transparent 19px),
         radial-gradient(circle at 0px 360px, #ffffff 0%, #ffffff 22px, transparent 23px),
-        radial-gradient(circle at 10px 390px, #ffffff 0%, #ffffff 16px, transparent 17px),
+        radial-gradient(circle at 15px 387px, #ffffff 0%, #ffffff 16px, transparent 17px),
         radial-gradient(circle at 0px 460px, #ffffff 0%, #ffffff 18px, transparent 19px),
-        radial-gradient(circle at 5px 490px, #ffffff 0%, #ffffff 12px, transparent 13px),
+        radial-gradient(circle at 12px 487px, #ffffff 0%, #ffffff 12px, transparent 13px),
         
         /* Capa 3: Espuma pequeña y satélites (Rápida, frente) - Desplazadas 15px arriba */
-        radial-gradient(circle at 10px 0px, #ffffff 0%, #ffffff 8px, transparent 9px), /* Extra top */
+        radial-gradient(circle at 15px 0px, #ffffff 0%, #ffffff 8px, transparent 9px), /* Extra top */
         radial-gradient(circle at 0px 10px, #ffffff 0%, #ffffff 10px, transparent 11px), /* Extra top */
         radial-gradient(circle at 0px 25px, #ffffff 0%, #ffffff 12px, transparent 13px),
-        radial-gradient(circle at 8px 40px, #ffffff 0%, #ffffff 8px, transparent 9px),
-        radial-gradient(circle at 20px 105px, #ffffff 0%, #ffffff 6px, transparent 7px),
-        radial-gradient(circle at 25px 175px, #ffffff 0%, #ffffff 4px, transparent 5px),
+        radial-gradient(circle at 15px 36px, #ffffff 0%, #ffffff 8px, transparent 9px),
+        radial-gradient(circle at 28px 102px, #ffffff 0%, #ffffff 6px, transparent 7px),
+        radial-gradient(circle at 34px 172px, #ffffff 0%, #ffffff 4px, transparent 5px),
         radial-gradient(circle at 0px 245px, #ffffff 0%, #ffffff 10px, transparent 11px),
-        radial-gradient(circle at 15px 315px, #ffffff 0%, #ffffff 7px, transparent 8px),
+        radial-gradient(circle at 24px 312px, #ffffff 0%, #ffffff 7px, transparent 8px),
         radial-gradient(circle at 0px 365px, #ffffff 0%, #ffffff 8px, transparent 9px);
         
     background-size: 
