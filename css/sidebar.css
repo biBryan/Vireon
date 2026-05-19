@@ -810,7 +810,7 @@ body.sidebar-expanded .system-container {
     position: absolute;
     top: 0;
     left: var(--sidebar-collapsed);
-    width: 60px;
+    width: 75px;
     height: 100vh;
     pointer-events: none;
     z-index: 90; /* Detrás del sidebar, pero delante del fondo */
@@ -820,7 +820,7 @@ body.sidebar-expanded .system-container {
 
 body.sidebar-expanded .sidebar-smoke-aura {
     left: var(--sidebar-expanded);
-    width: 60px; /* Un poco más ancho cuando está expandido */
+    width: 75px;
 }
 
 .sidebar-smoke-aura::before {
@@ -873,11 +873,11 @@ body.sidebar-expanded .sidebar-smoke-aura {
         
     background-size: 
         /* Capa 1 (11 gradientes, Altura 600px) */ 
-        60px 600px, 60px 600px, 60px 600px, 60px 600px, 60px 600px, 60px 600px, 60px 600px, 60px 600px, 60px 600px, 60px 600px, 60px 600px,
+        75px 600px, 75px 600px, 75px 600px, 75px 600px, 75px 600px, 75px 600px, 75px 600px, 75px 600px, 75px 600px, 75px 600px, 75px 600px,
         /* Capa 2 (10 gradientes, Altura 500px) */ 
-        60px 500px, 60px 500px, 60px 500px, 60px 500px, 60px 500px, 60px 500px, 60px 500px, 60px 500px, 60px 500px, 60px 500px,
+        75px 500px, 75px 500px, 75px 500px, 75px 500px, 75px 500px, 75px 500px, 75px 500px, 75px 500px, 75px 500px, 75px 500px,
         /* Capa 3 (11 gradientes, Altura 400px) */ 
-        60px 400px, 60px 400px, 60px 400px, 60px 400px, 60px 400px, 60px 400px, 60px 400px, 60px 400px, 60px 400px, 60px 400px, 60px 400px;
+        75px 400px, 75px 400px, 75px 400px, 75px 400px, 75px 400px, 75px 400px, 75px 400px, 75px 400px, 75px 400px, 75px 400px, 75px 400px;
         
     background-repeat: repeat-y;
     opacity: 0.95;
