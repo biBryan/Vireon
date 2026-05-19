@@ -133,25 +133,29 @@
 }
 
 /* ─────────────────────────────────────────────
-   Anime Smoke Rising Parallax Wave
+   Anime Smoke — Three Independent Rise Keyframes
+   Cada keyframe mueve exactamente 1 tile-height:
+   Slow=600px, Mid=500px, Fast=400px → loop perfecto
 ───────────────────────────────────────────── */
-@keyframes animeSmokeParallax {
-    0% {
-        background-position: 
-            /* Capa 1 (11 items) */
-            0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px,
-            /* Capa 2 (10 items) */
-            0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px,
-            /* Capa 3 (11 items) */
-            0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
-    }
-    100% {
-        background-position: 
-            /* Capa 1: Lenta (múltiplo exacto de 600px, 11 items) */
-            0px -600px, 0px -600px, 0px -600px, 0px -600px, 0px -600px, 0px -600px, 0px -600px, 0px -600px, 0px -600px, 0px -600px, 0px -600px,
-            /* Capa 2: Media (múltiplo exacto de 500px, 10 items) */
-            0px -1000px, 0px -1000px, 0px -1000px, 0px -1000px, 0px -1000px, 0px -1000px, 0px -1000px, 0px -1000px, 0px -1000px, 0px -1000px,
-            /* Capa 3: Rápida (múltiplo exacto de 400px, 11 items) */
-            0px -1200px, 0px -1200px, 0px -1200px, 0px -1200px, 0px -1200px, 0px -1200px, 0px -1200px, 0px -1200px, 0px -1200px, 0px -1200px, 0px -1200px;
-    }
+
+/* Capa 1: Sube directo (4 gradientes) */
+@keyframes smokeRiseSlow {
+    from { background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px; }
+    to   { background-position: 0px -600px, 0px -600px, 0px -600px, 0px -600px; }
+}
+
+/* Capa 2: Sube con deriva lateral suave (4 gradientes) */
+@keyframes smokeRiseMid {
+    0%   { background-position: 0px 0px,    0px 0px,    0px 0px,    0px 0px; }
+    30%  { background-position: 4px -150px, 4px -150px, 4px -150px, 4px -150px; }
+    65%  { background-position: 1px -325px, 1px -325px, 1px -325px, 1px -325px; }
+    100% { background-position: 0px -500px, 0px -500px, 0px -500px, 0px -500px; }
+}
+
+/* Capa 3: Sube con más deriva lateral (5 gradientes) */
+@keyframes smokeRiseFast {
+    0%   { background-position: 0px 0px,    0px 0px,    0px 0px,    0px 0px,    0px 0px; }
+    25%  { background-position: -5px -100px, -5px -100px, -5px -100px, -5px -100px, -5px -100px; }
+    75%  { background-position: 4px -300px,  4px -300px,  4px -300px,  4px -300px,  4px -300px; }
+    100% { background-position: 0px -400px,  0px -400px,  0px -400px,  0px -400px,  0px -400px; }
 }

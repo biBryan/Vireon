@@ -804,7 +804,9 @@ body.sidebar-expanded .system-container {
 }
 
 /* ─────────────────────────────────────────────
-   Anime Smoke Aura — Vertical Wave
+   Anime Smoke Aura — Three Independent Layers
+   Cada capa tiene su propio ciclo → loop continuo
+   y movimiento orgánico sin reset visible.
 ───────────────────────────────────────────── */
 .sidebar-smoke-aura {
     position: absolute;
@@ -813,78 +815,64 @@ body.sidebar-expanded .system-container {
     width: 75px;
     height: 100vh;
     pointer-events: none;
-    z-index: 90; /* Detrás del sidebar, pero delante del fondo */
+    z-index: 90;
     transition: left var(--sidebar-transition), width var(--sidebar-transition);
     overflow: hidden;
+
+    /* ── Capa 1: Bolitas grandes, sube lento (18s) ── */
+    background-image:
+        radial-gradient(circle at 4px  80px,  #fff 0%, #fff 28px, transparent 29px),
+        radial-gradient(circle at 12px 220px, #fff 0%, #fff 24px, transparent 25px),
+        radial-gradient(circle at 2px  355px, #fff 0%, #fff 30px, transparent 31px),
+        radial-gradient(circle at 14px 490px, #fff 0%, #fff 22px, transparent 23px);
+    background-size: 75px 600px;
+    background-repeat: repeat-y;
+    background-position: 0px 0px;
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.28));
+    animation: smokeRiseSlow 18s linear infinite;
 }
 
 body.sidebar-expanded .sidebar-smoke-aura {
     left: var(--sidebar-expanded);
-    width: 75px;
 }
 
+/* ── Capa 2: Bolitas medianas, velocidad media (13s), deriva lateral suave ── */
 .sidebar-smoke-aura::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0; /* Pegado exactamente al panel */
-    width: 100%;
-    height: 200vh; /* Altura doble para scroll infinito */
-    
-    /* Espuma Anime Parallax: Capas de nubes distribuidas para reducir huecos largos */
-    background-image: 
-        /* Capa 1: Nubes grandes base (Lentas, fondo) */
-        radial-gradient(circle at 0px 26px, #ffffff 0%, #ffffff 25px, transparent 26px),
-        radial-gradient(circle at 15px 47px, #ffffff 0%, #ffffff 20px, transparent 21px),
-        radial-gradient(circle at 0px 150px, #ffffff 0%, #ffffff 22px, transparent 23px),
-        radial-gradient(circle at 18px 175px, #ffffff 0%, #ffffff 18px, transparent 19px),
-        radial-gradient(circle at 0px 280px, #ffffff 0%, #ffffff 28px, transparent 29px),
-        radial-gradient(circle at 14px 307px, #ffffff 0%, #ffffff 20px, transparent 21px),
-        radial-gradient(circle at 0px 420px, #ffffff 0%, #ffffff 24px, transparent 25px),
-        radial-gradient(circle at 22px 446px, #ffffff 0%, #ffffff 16px, transparent 17px),
-        radial-gradient(circle at 0px 520px, #ffffff 0%, #ffffff 20px, transparent 21px),
-        radial-gradient(circle at 16px 547px, #ffffff 0%, #ffffff 15px, transparent 16px),
-        radial-gradient(circle at 8px 576px, #ffffff 0%, #ffffff 14px, transparent 15px),
-        
-        /* Capa 2: Nubes medianas (Velocidad media) */
-        radial-gradient(circle at 0px 16px, #ffffff 0%, #ffffff 15px, transparent 16px),
-        radial-gradient(circle at 0px 40px, #ffffff 0%, #ffffff 20px, transparent 21px),
-        radial-gradient(circle at 20px 66px, #ffffff 0%, #ffffff 15px, transparent 16px),
-        radial-gradient(circle at 24px 95px, #ffffff 0%, #ffffff 10px, transparent 11px),
-        radial-gradient(circle at 0px 200px, #ffffff 0%, #ffffff 25px, transparent 26px),
-        radial-gradient(circle at 18px 226px, #ffffff 0%, #ffffff 18px, transparent 19px),
-        radial-gradient(circle at 0px 360px, #ffffff 0%, #ffffff 22px, transparent 23px),
-        radial-gradient(circle at 15px 387px, #ffffff 0%, #ffffff 16px, transparent 17px),
-        radial-gradient(circle at 0px 460px, #ffffff 0%, #ffffff 18px, transparent 19px),
-        radial-gradient(circle at 12px 486px, #ffffff 0%, #ffffff 12px, transparent 13px),
-        
-        /* Capa 3: Espuma pequeña y satélites (Rápida, frente) */
-        radial-gradient(circle at 15px 10px, #ffffff 0%, #ffffff 8px, transparent 9px),
-        radial-gradient(circle at 0px 18px, #ffffff 0%, #ffffff 10px, transparent 11px),
-        radial-gradient(circle at 0px 32px, #ffffff 0%, #ffffff 12px, transparent 13px),
-        radial-gradient(circle at 15px 45px, #ffffff 0%, #ffffff 8px, transparent 9px),
-        radial-gradient(circle at 24px 65px, #ffffff 0%, #ffffff 6px, transparent 7px),
-        radial-gradient(circle at 28px 102px, #ffffff 0%, #ffffff 6px, transparent 7px),
-        radial-gradient(circle at 34px 172px, #ffffff 0%, #ffffff 4px, transparent 5px),
-        radial-gradient(circle at 0px 245px, #ffffff 0%, #ffffff 10px, transparent 11px),
-        radial-gradient(circle at 24px 312px, #ffffff 0%, #ffffff 7px, transparent 8px),
-        radial-gradient(circle at 18px 340px, #ffffff 0%, #ffffff 5px, transparent 6px),
-        radial-gradient(circle at 0px 365px, #ffffff 0%, #ffffff 8px, transparent 9px);
-        
-    background-size: 
-        /* Capa 1 (11 gradientes, Altura 600px) */ 
-        75px 600px, 75px 600px, 75px 600px, 75px 600px, 75px 600px, 75px 600px, 75px 600px, 75px 600px, 75px 600px, 75px 600px, 75px 600px,
-        /* Capa 2 (10 gradientes, Altura 500px) */ 
-        75px 500px, 75px 500px, 75px 500px, 75px 500px, 75px 500px, 75px 500px, 75px 500px, 75px 500px, 75px 500px, 75px 500px,
-        /* Capa 3 (11 gradientes, Altura 400px) */ 
-        75px 400px, 75px 400px, 75px 400px, 75px 400px, 75px 400px, 75px 400px, 75px 400px, 75px 400px, 75px 400px, 75px 400px, 75px 400px;
-        
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+
+    background-image:
+        radial-gradient(circle at 18px 55px,  #fff 0%, #fff 19px, transparent 20px),
+        radial-gradient(circle at 6px  170px, #fff 0%, #fff 20px, transparent 21px),
+        radial-gradient(circle at 22px 295px, #fff 0%, #fff 17px, transparent 18px),
+        radial-gradient(circle at 8px  415px, #fff 0%, #fff 18px, transparent 19px);
+    background-size: 75px 500px;
     background-repeat: repeat-y;
-    opacity: 0.95;
-    
-    /* Glow sutil para integración sin perder la solidez de la forma */
-    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
-    
-    /* Animación parallax */
-    animation: animeSmokeParallax 15s linear infinite;
+    background-position: 0px 0px;
+    opacity: 0.92;
+    animation: smokeRiseMid 13s linear infinite;
+}
+
+/* ── Capa 3: Espuma pequeña, más rápida (9s), deriva lateral más notoria ── */
+.sidebar-smoke-aura::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+
+    background-image:
+        radial-gradient(circle at 30px 45px,  #fff 0%, #fff 9px,  transparent 10px),
+        radial-gradient(circle at 10px 125px, #fff 0%, #fff 7px,  transparent 8px),
+        radial-gradient(circle at 38px 215px, #fff 0%, #fff 8px,  transparent 9px),
+        radial-gradient(circle at 16px 305px, #fff 0%, #fff 6px,  transparent 7px),
+        radial-gradient(circle at 5px  358px, #fff 0%, #fff 9px,  transparent 10px);
+    background-size: 75px 400px;
+    background-repeat: repeat-y;
+    background-position: 0px 0px;
+    opacity: 0.85;
+    animation: smokeRiseFast 9s linear infinite;
 }
