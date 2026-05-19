@@ -140,22 +140,26 @@
 
 /* Capa 1: Sube directo (4 gradientes) */
 @keyframes smokeRiseSlow {
-    from { background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px; }
-    to   { background-position: 0px -600px, 0px -600px, 0px -600px, 0px -600px; }
+    0%   { background-position: 0px 0px,    0px 0px,    0px 0px,    0px 0px; }
+    30%  { background-position: 1px -180px, 2px -180px, -1px -180px, 0px -180px; }
+    65%  { background-position: -1px -390px, 0px -390px, 1px -390px, -2px -390px; }
+    100% { background-position: 0px -600px,  0px -600px,  0px -600px,  0px -600px; }
 }
 
 /* Capa 2: Sube con deriva lateral suave (4 gradientes) */
 @keyframes smokeRiseMid {
     0%   { background-position: 0px 0px,    0px 0px,    0px 0px,    0px 0px; }
-    30%  { background-position: 4px -150px, 4px -150px, 4px -150px, 4px -150px; }
-    65%  { background-position: 1px -325px, 1px -325px, 1px -325px, 1px -325px; }
-    100% { background-position: 0px -500px, 0px -500px, 0px -500px, 0px -500px; }
+    25%  { background-position: 3px -125px, -2px -130px, 1px -120px, 0px -115px; }
+    55%  { background-position: -2px -280px, 1px -270px, 2px -290px, -1px -275px; }
+    85%  { background-position: 1px -420px, 0px -405px, -1px -415px, 2px -410px; }
+    100% { background-position: 0px -500px,  0px -500px,  0px -500px,  0px -500px; }
 }
 
 /* Capa 3: Sube con más deriva lateral (5 gradientes) */
 @keyframes smokeRiseFast {
     0%   { background-position: 0px 0px,    0px 0px,    0px 0px,    0px 0px,    0px 0px; }
-    25%  { background-position: -5px -100px, -5px -100px, -5px -100px, -5px -100px, -5px -100px; }
-    75%  { background-position: 4px -300px,  4px -300px,  4px -300px,  4px -300px,  4px -300px; }
+    20%  { background-position: -4px -90px,  3px -95px,  -2px -88px,  1px -92px,  0px -85px; }
+    45%  { background-position: 2px -170px,  -3px -175px, 1px -165px,  -1px -168px, 4px -160px; }
+    70%  { background-position: -1px -255px, 2px -260px,  -4px -250px, 1px -258px,  0px -245px; }
     100% { background-position: 0px -400px,  0px -400px,  0px -400px,  0px -400px,  0px -400px; }
 }
