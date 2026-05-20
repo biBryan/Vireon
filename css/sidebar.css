@@ -821,10 +821,10 @@ body.sidebar-expanded .system-container {
 
     /* ── Capa 1: Bolitas grandes, sube lento (18s) ── */
     background-image:
-        radial-gradient(circle at 4px  80px,  #fff 0%, #fff 28px, transparent 29px),
-        radial-gradient(circle at 12px 220px, #fff 0%, #fff 24px, transparent 25px),
-        radial-gradient(circle at 2px  355px, #fff 0%, #fff 30px, transparent 31px),
-        radial-gradient(circle at 14px 490px, #fff 0%, #fff 22px, transparent 23px);
+        radial-gradient(circle at 4px  80px,  #fff 0%, #fff 28px, rgba(255, 255, 255, 0) 29px),
+        radial-gradient(circle at 12px 220px, #fff 0%, #fff 24px, rgba(255, 255, 255, 0) 25px),
+        radial-gradient(circle at 2px  355px, #fff 0%, #fff 30px, rgba(255, 255, 255, 0) 31px),
+        radial-gradient(circle at 14px 490px, #fff 0%, #fff 22px, rgba(255, 255, 255, 0) 23px);
     background-size: 75px 600px;
     background-repeat: repeat-y;
     background-position: 0px 0px;
@@ -845,10 +845,10 @@ body.sidebar-expanded .sidebar-smoke-aura {
     pointer-events: none;
 
     background-image:
-        radial-gradient(circle at 18px 55px,  #fff 0%, #fff 19px, transparent 20px),
-        radial-gradient(circle at 6px  170px, #fff 0%, #fff 20px, transparent 21px),
-        radial-gradient(circle at 22px 295px, #fff 0%, #fff 17px, transparent 18px),
-        radial-gradient(circle at 8px  415px, #fff 0%, #fff 18px, transparent 19px);
+        radial-gradient(circle at 18px 55px,  #fff 0%, #fff 19px, rgba(255, 255, 255, 0) 20px),
+        radial-gradient(circle at 6px  170px, #fff 0%, #fff 20px, rgba(255, 255, 255, 0) 21px),
+        radial-gradient(circle at 22px 295px, #fff 0%, #fff 17px, rgba(255, 255, 255, 0) 18px),
+        radial-gradient(circle at 8px  415px, #fff 0%, #fff 18px, rgba(255, 255, 255, 0) 19px);
     background-size: 75px 500px;
     background-repeat: repeat-y;
     background-position: 0px 0px;
@@ -865,11 +865,11 @@ body.sidebar-expanded .sidebar-smoke-aura {
     pointer-events: none;
 
     background-image:
-        radial-gradient(circle at 30px 45px,  #fff 0%, #fff 9px,  transparent 10px),
-        radial-gradient(circle at 10px 125px, #fff 0%, #fff 7px,  transparent 8px),
-        radial-gradient(circle at 38px 215px, #fff 0%, #fff 8px,  transparent 9px),
-        radial-gradient(circle at 16px 305px, #fff 0%, #fff 6px,  transparent 7px),
-        radial-gradient(circle at 5px  358px, #fff 0%, #fff 9px,  transparent 10px);
+        radial-gradient(circle at 30px 45px,  #fff 0%, #fff 9px,  rgba(255, 255, 255, 0) 10px),
+        radial-gradient(circle at 10px 125px, #fff 0%, #fff 7px,  rgba(255, 255, 255, 0) 8px),
+        radial-gradient(circle at 38px 215px, #fff 0%, #fff 8px,  rgba(255, 255, 255, 0) 9px),
+        radial-gradient(circle at 16px 305px, #fff 0%, #fff 6px,  rgba(255, 255, 255, 0) 7px),
+        radial-gradient(circle at 5px  358px, #fff 0%, #fff 9px,  rgba(255, 255, 255, 0) 10px);
     background-size: 75px 400px;
     background-repeat: repeat-y;
     background-position: 0px 0px;
