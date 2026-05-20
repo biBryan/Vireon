@@ -150,20 +150,18 @@
 
 /* Capa 2: Sube con onda respiratoria muy suave (4 gradientes) */
 @keyframes smokeRiseMid {
-    0%   { background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px; }
-    18%  { background-position: 0.5px -90px, 0.5px -90px, 0.5px -90px, 0.5px -90px; }
-    36%  { background-position: 0px -180px, 0px -180px, 0px -180px, 0px -180px; }
-    54%  { background-position: -0.5px -270px, -0.5px -270px, -0.5px -270px, -0.5px -270px; }
-    72%  { background-position: 0px -360px, 0px -360px, 0px -360px, 0px -360px; }
-    100% { background-position: 0px -500px, 0px -500px, 0px -500px, 0px -500px; }
+    0%, 100% { background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px; }
+    20%  { background-position: 1px -100px, 1px -100px, 1px -100px, 1px -100px; }
+    40%  { background-position: 0px -200px, 0px -200px, 0px -200px, 0px -200px; }
+    60%  { background-position: -1px -300px, -1px -300px, -1px -300px, -1px -300px; }
+    80%  { background-position: 0px -400px, 0px -400px, 0px -400px, 0px -400px; }
 }
 
 /* Capa 3: Sube con onda suave y constante (5 gradientes) */
 @keyframes smokeRiseFast {
-    0%   { background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px; }
-    12%  { background-position: 0.8px -48px, 0.8px -48px, 0.8px -48px, 0.8px -48px, 0.8px -48px; }
-    30%  { background-position: 0px -120px, 0px -120px, 0px -120px, 0px -120px, 0px -120px; }
-    48%  { background-position: -0.8px -192px, -0.8px -192px, -0.8px -192px, -0.8px -192px, -0.8px -192px; }
-    70%  { background-position: 0px -280px, 0px -280px, 0px -280px, 0px -280px, 0px -280px; }
-    100% { background-position: 0px -400px, 0px -400px, 0px -400px, 0px -400px, 0px -400px; }
+    0%, 100% { background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px; }
+    15%  { background-position: 1px -60px, 1px -60px, 1px -60px, 1px -60px, 1px -60px; }
+    35%  { background-position: 0px -140px, 0px -140px, 0px -140px, 0px -140px, 0px -140px; }
+    55%  { background-position: -1px -220px, -1px -220px, -1px -220px, -1px -220px, -1px -220px; }
+    75%  { background-position: 0px -310px, 0px -310px, 0px -310px, 0px -310px, 0px -310px; }
 }
